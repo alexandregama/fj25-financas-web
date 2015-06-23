@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/_template.xhtml">
+	
+		<ui:define name="cabecalho">
+			<h:outputText value="Invalidação programática do Cache" />
+		</ui:define>
+	
+		<ui:define name="corpo">
+			<h:form>
+				<h:outputText value="Id da Conta para invalidar:" />
+				<h:inputText value="#{cacheInvalidaBean.id}" />
+				<h:commandButton value="Pesquisar"
+					action="#{cacheInvalidaBean.invalidar}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: 
+Dependencies: org.hibernate, org.hibernate.search.orm services, org.hibernate.search.engine, org.apache.lucene

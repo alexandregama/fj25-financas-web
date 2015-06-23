@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+   		<ui:define name="cabecalho">
+		   <h:outputText value="Cadastro de Contas" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+	        <h:form>
+	        	<f:validateBean disabled="true">
+			        <h:panelGrid columns="3">
+			        	<h:outputText value="Id" rendered="#{contasBean.conta.id!=null}" />
+			        	<h:inputText id="id" value="#{contasBean.conta.id}" rendered="#{contasBean.conta.id!=null}" readonly="true"/>
+			        	<h:message for="id"  rendered="#{contasBean.conta.id!=null}" />
+			        	
+			        	<h:outputText value="Titular"/>
+			        	<h:inputText id="titular" value="#{contasBean.conta.titular}"/>
+			        	<h:message for="titular" />
+			        	
+						<h:outputText value="Banco"/>
+						<h:inputText id="banco" value="#{contasBean.conta.banco}"/>
+						<h:message for="banco" />
+			        	
+			        	<h:outputText value="Agência"/>
+						<h:inputText id="agencia" value="#{contasBean.conta.agencia}" />
+						<h:message for="agencia" />
+			
+			        	<h:outputText value="Número"/>
+			        	<h:inputText id="numero" value="#{contasBean.conta.numero}"/>
+			        	<h:message for="numero" />
+			        	
+			        	<h:commandButton value="Gravar" action="#{contasBean.grava}"/> 
+			        </h:panelGrid>
+			    </f:validateBean>
+	        </h:form>
+	        
+	        <h2><h:outputText value="Todas as Contas" /></h2>
+	        <hr />
+	        <h:form>
+	        <h:dataTable value="#{contasBean.contas}" var="conta">
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="ID"/></f:facet>
+	        		#{conta.id}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Titular"/></f:facet>
+	        		#{conta.titular}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Banco"/></f:facet>
+	        		#{conta.banco}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Agência"/></f:facet>
+	        		#{conta.agencia}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Núm. Conta"/></f:facet>
+	        		#{conta.numero}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Ações"/></f:facet>
+	        		<h:commandLink value="Remover" action="#{contasBean.remove}">
+					<f:setPropertyActionListener value="#{conta}" target="#{contasBean.conta}"/>
+	        		</h:commandLink> |
+	        		<h:commandLink value="Alterar">
+					<f:setPropertyActionListener value="#{conta}" target="#{contasBean.conta}"/>
+	        		</h:commandLink>
+	        	</h:column>
+	        </h:dataTable>
+	        </h:form>
+		</ui:define>
+	</ui:composition>
+</html>

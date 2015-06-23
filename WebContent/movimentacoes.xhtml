@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+   		<ui:define name="cabecalho">
+			<h:outputText value="Cadastro de Movimentações" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+ 
+		   <h:form>
+		   	<f:validateBean disabled="true">
+	        	<h:messages />
+		   		<h:panelGrid columns="2">
+		    	
+		    	<h:outputText value="Conta"/>
+	        	<h:selectOneMenu value="#{movimentacoesBean.contaId}">
+	        		<f:selectItem itemLabel="Escolha a conta" itemValue="" noSelectionOption="true"/>
+	        		<f:selectItems value="#{contasBean.contas}" var="conta" itemLabel="#{conta.titular} - #{conta.banco}" itemValue="#{conta.id}" />
+	        	</h:selectOneMenu>
+	        	
+	        	<h:outputText value="Descrição" />
+	        	<h:inputTextarea value="#{movimentacoesBean.movimentacao.descricao}" />
+	        	
+	        	<h:outputText value="Valor" />
+		    	<h:inputText value="#{movimentacoesBean.movimentacao.valor}" />
+		    	
+		    	<h:outputText value="Tipo" />
+		    	<h:selectOneMenu value="#{movimentacoesBean.movimentacao.tipoMovimentacao}">
+		    		<f:selectItem itemLabel="Escolha o tipo" itemValue="" noSelectionOption="true"/>
+		    		<f:selectItems value="#{movimentacoesBean.tiposDeMovimentacao}" />
+		    	</h:selectOneMenu>		   		    
+		    	
+		    	<h:outputText value="Data" />
+		    	<h:inputText value="#{movimentacoesBean.movimentacao.data.time}">
+		    		<f:convertDateTime pattern="dd/MM/yyyy" />
+		    	</h:inputText>
+		    	
+		        <h:outputText value="Categorias" rendered="false"/>
+		    	<h:panelGroup rendered="false">
+		        	<h:selectOneMenu value="#{movimentacoesBean.categoriaId}" id="selectCategoria">
+			    		<f:selectItem itemLabel="Escolha a Categoria" itemValue="" noSelectionOption="true"/>
+			    		<f:selectItems value="#{movimentacoesBean.categorias}" var="categoria" itemValue="#{categoria.id}" itemLabel="#{categoria.nome}"/>
+			    	</h:selectOneMenu>
+				    <h:commandButton value="+" action="#{movimentacoesBean.adicionaCategoria}" >
+				    	<f:ajax execute="selectCategoria" render="tblCategoria"/>
+				    </h:commandButton>
+			    	<h:dataTable value="#{movimentacoesBean.movimentacao.categorias}" var="categoria" id="tblCategoria" >
+			    		<h:column>
+			    			<h:outputText value="#{categoria.nome}" />
+			    		</h:column>
+			    	</h:dataTable>
+			    </h:panelGroup>
+	
+				<br />
+				
+			    <h:commandButton value="Gravar" action="#{movimentacoesBean.grava}"/>
+		    	</h:panelGrid>
+		    </f:validateBean>
+		   </h:form>
+    
+	        <h2><h:outputText value="Todas as Movimentações" /></h2>
+	        <hr />
+	       <h:form>
+	        <h:dataTable value="#{movimentacoesBean.movimentacoes}" var="movimentacao">
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="ID" />
+	        		</f:facet>
+	        		#{movimentacao.id}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Conta" />
+	        		</f:facet>
+	        		#{movimentacao.conta.titular} - #{movimentacao.conta.banco}
+	        	</h:column>
+	        	<h:column>
+					<f:facet name="header">
+						<h:outputText value="Valor" />
+					</f:facet>
+					<h:outputText value="#{movimentacao.valor}" >
+						<f:convertNumber pattern="R$ #0.00"/>
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Data" />
+					</f:facet>
+					<h:outputText value="#{movimentacao.data.time}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</h:column>
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Descrição" />
+	        		</f:facet>
+	        		#{movimentacao.descricao}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Tipo" />
+	        			
+	        		</f:facet>
+	        		#{movimentacao.tipoMovimentacao}
+	        	</h:column>
+	        	<h:column rendered="false">
+	        		<f:facet name="header">
+	        			<h:outputText value="Categorias" />
+	        		</f:facet>        		
+	        		#{movimentacao.categorias}
+	        	</h:column>        	
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Ações"/></f:facet>
+	        			<h:commandLink value="Remover" action="#{movimentacoesBean.remove}">
+							<f:setPropertyActionListener value="#{movimentacao}" target="#{movimentacoesBean.movimentacao}"/>
+	        			</h:commandLink>
+	        	</h:column>
+	        </h:dataTable>  
+	       </h:form>
+		</ui:define>
+	</ui:composition>
+
+</html>

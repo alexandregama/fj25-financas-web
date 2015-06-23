@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+	<f:view contentType="text/html" />
+    <h:head>
+        <title>FJ-25 - Sistema de Finanças</title>
+    </h:head>
+    <h:body>
+    	<div style="position:relative;">
+    		<h:graphicImage library="img" name="caelum.png" style="padding:0; margin:0;"/>
+        	<h2 style="position:absolute; display:inline; left:200px; bottom:0; padding:0; margin:0">FJ-25 - Sistema de Finanças</h2>
+		</div>
+		
+		<hr />
+		
+	    <h:panelGrid columns="1" style="float:left">
+        
+			<h3>Cadastro da Conta e Movimentação</h3>        
+	        <h:link outcome="contas" value="Cadastro de contas"/>
+	        <h:link outcome="movimentacoes" value="Cadastro de movimentações"/>
+	        
+	        <h3>EJB 3.1 - Ciclo de Vida e TimerService </h3>    
+	        <h:link outcome="cicloDeVida" value="Ciclo de Vida"/>
+	        <h:link outcome="agendamento" value="Agendamento (TimerService)"/>	 
+	        
+			<h3>Pesquisas com JPQL</h3>    
+	        <h:link outcome="movimentacoesDaConta" value="Pesquisa de movimentações por conta"/>
+	        <h:link outcome="movimentacoesPorValorETipo" value="Pesquisa de movimentações por valor e tipo"/>
+	        <h:link outcome="totalMovimentado" value="Total movimentado por conta"/>
+	        <h:link outcome="movimentacoesPorTitular" value="Pesquisa de movimentações por titular"/>
+			<h:link outcome="mesesComMovimentacao" value="Valor por mês/ano"/>
+	        <h:link outcome="qtdeMovimentacoesDaConta" value="Quantidade de movimentações por conta"/>
+	    </h:panelGrid>    
+
+	    <h:panelGrid columns="1" style="float:left; margin-left:40px">
+	        <h3>Pesquisas com Criteria</h3>
+	        <h:link outcome="criteria" value="Exercícios opcionais"/>
+	        <h:link outcome="pesquisaMovimentacoes" value="Filtro dinâmico de movimentações"/>
+
+	        <h3>Cache</h3>
+	        <h:link outcome="cache" value="Teste do Cache"/>
+	        <h:link outcome="cacheInvalida" value="Descartando objetos"/>
+	       
+	        <h3>Estatísticas e Operação em Lote</h3>
+	        <h:link outcome="estatisticas" value="Estatísticas"/>
+	        <h:link outcome="operacaoEmLote" value="Operação em lote"/>
+	        
+	        <h3>Bean Validation</h3>
+	        <h:link  outcome="validacao" value="Validação do modelo"/>
+	        
+	        <h3>(Apêndice) - Pesquisa textual</h3>
+	       	<h:link  outcome="searchIndexacao" value="Indexação"/>
+	        <h:link  outcome="searchPesquisaTextual" value="Pesquisa por descrição"/>
+		</h:panelGrid>
+    </h:body>
+</html>

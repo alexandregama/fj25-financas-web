@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+   		<ui:define name="cabecalho">
+		   <h:outputText value="Operação em lote (Batch Update)" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+		   <h:form>
+		   		<h:panelGrid columns="2">
+					<h:outputText value="Nome antigo do Banco:"/>
+					<h:inputText value="#{operacaoEmLoteBean.antigoNomeBanco}" />
+					<h:outputText value="Nome novo do Banco:"/>
+					<h:inputText value="#{operacaoEmLoteBean.novoNomeBanco}" />
+					<h:commandButton value="Atualiza em lote" action="#{operacaoEmLoteBean.atualizar}"/>
+	    		</h:panelGrid>
+		   </h:form>
+		   
+		   <br />
+		   
+		   Quantidade de contas alteradas: #{operacaoEmLoteBean.contasAlteradas}
+		</ui:define>
+	</ui:composition>
+</html>

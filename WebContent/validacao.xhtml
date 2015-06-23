@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+    
+    	<ui:define name="cabecalho">
+		   <h:outputText value="Validação através de Bean Validation" />
+    	</ui:define>
+    	
+		<ui:define name="corpo">
+	        <h:form>
+	        	<h:messages />
+	        	<f:validateBean disabled="true">
+			        <h:panelGrid columns="2">
+			        	<h:outputText value="Titular"/>
+			        	<h:inputText id="titular" value="#{validacaoBean.conta.titular}"/>
+				
+						<h:outputText value="Banco"/>
+						<h:inputText id="banco" value="#{validacaoBean.conta.banco}"/>
+						
+			        	<h:outputText value="Agência"/>
+						<h:inputText id="agencia" value="#{validacaoBean.conta.agencia}" />
+						 
+			        	<h:outputText value="Número"/>
+			        	<h:inputText id="numero" value="#{validacaoBean.conta.numero}"/>
+						
+			        	<h:commandButton value="Valida os dados" action="#{validacaoBean.validar}"/>
+			        </h:panelGrid>
+		        </f:validateBean>
+	        </h:form>
+		</ui:define>
+	</ui:composition>
+</html>

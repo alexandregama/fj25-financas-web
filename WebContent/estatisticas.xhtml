@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+   		<ui:define name="cabecalho">
+		   <h:outputText value="Estatísticas com Hibernate" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+	    	<h:form>
+	    		<h:commandButton action="#{estatisticasBean.gera}" value="Gerar estatísticas"/>
+	    	</h:form>
+	    	<hr />
+	    	
+	        <h:outputText value="EntityManagers abertas: #{estatisticasBean.estatisticas.sessionOpenCount }" /><br />
+	        <h:outputText value="EntityManagers fechadas: #{estatisticasBean.estatisticas.sessionCloseCount }" /><br />
+	        <h:outputText value="Query Cache Hit: #{estatisticasBean.estatisticas.queryCacheHitCount }" /><br />
+	        <h:outputText value="Query Cache Miss: #{estatisticasBean.estatisticas.queryCacheMissCount }" /><br />
+	        <h:outputText value="Query Cache Put: #{estatisticasBean.estatisticas.queryCachePutCount }" /><br />
+	        <h:outputText value="Second Level Cache Hit: #{estatisticasBean.estatisticas.secondLevelCacheHitCount }" /><br />
+	        <h:outputText value="Second Level Cache Miss: #{estatisticasBean.estatisticas.secondLevelCacheMissCount }" /><br />
+	        <h:outputText value="Second Level Cache Put: #{estatisticasBean.estatisticas.secondLevelCachePutCount }" /><br />
+	        <h:outputText value="Query Execution Count: #{estatisticasBean.estatisticas.queryExecutionCount }" /><br />
+	        <h:outputText value="Query mais lenta: #{estatisticasBean.estatisticas.queryExecutionMaxTime} ms" /><br />
+		</ui:define>
+	</ui:composition>
+</html>

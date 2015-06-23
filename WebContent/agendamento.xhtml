@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+    
+    	<ui:define name="cabecalho">
+		   <h:outputText value="EJB 3: Timer Service" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+
+		<h:form>
+			<h:panelGrid columns="3">
+			<h:outputText value="Expressão Minutos:" />
+			<h:inputText value="#{agendadorFormBean.expressaoMinutos}" />	  
+			<h:outputText value="Exemplos: */1 - cada minuto, 10 - as 10 minutos" />
+			
+			<h:outputText value="Expressão Segundos:" />
+			<h:inputText value="#{agendadorFormBean.expressaoSegundos}" />
+			<h:outputText value="Exemplos: 10-20 - entre 10 e 20, 30/5 - segundos 30,35,40,45,50,55" />
+
+			 
+			<h:commandButton value="Submeter agendamento" actionListener="#{agendadorFormBean.agendar}"/>
+			</h:panelGrid>
+		</h:form>
+	    
+	       <p><h:outputText value="Após ter submetido o formulário verfique o console." /></p>
+		</ui:define>
+	</ui:composition>
+</html>

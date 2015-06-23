@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+   		<ui:define name="cabecalho">
+		   <h:outputText value="Exercícios opcionais de Criteria" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+		
+			<h3><h:outputText value="Listar todas as Movimentações" /></h3>
+			<h:form>
+					<h:commandButton value="Listar" action="#{criteriaBean.listarTodasAsMovimentacoes}"/>
+			</h:form>
+	    
+	        <h:dataTable value="#{criteriaBean.movimentacoes}" var="movimentacao" rendered="#{criteriaBean.movimentacoes != null}">
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Conta" />
+	        		</f:facet>
+	        		#{movimentacao.conta.titular} - #{movimentacao.conta.banco}
+	        	</h:column>
+	        	<h:column>
+					<f:facet name="header">
+						<h:outputText value="Valor" />
+					</f:facet>
+					<h:outputText value="#{movimentacao.valor}" >
+						<f:convertNumber pattern="R$ #0.00"/>
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Data" />
+					</f:facet>
+					<h:outputText value="#{movimentacao.data.time}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</h:column>
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Descrição" />
+	        		</f:facet>
+	        		#{movimentacao.descricao}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Tipo" />
+	        			
+	        		</f:facet>
+	        		
+	        		#{movimentacao.tipoMovimentacao}
+	        	</h:column>
+	        </h:dataTable>  
+	        
+	        <hr />
+			<hr />
+			
+	        <h3><h:outputText value="Total movimentado do Titular" /></h3>
+			<h:form>
+				<h:inputText value="#{criteriaBean.titular}" />
+				<h:commandButton value="Somar" action="#{criteriaBean.somaMovimentacoesDoTitular}"/>
+			</h:form>
+			<br />
+			Soma: <h:outputText value="#{criteriaBean.soma}" />
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+    
+    	<ui:define name="cabecalho">
+		   <h:outputText value="EJB 3 Session Bean: Ciclo de vida" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+
+		   <h:form>
+		    		<h:commandButton value="Execute o Agendador e teste o ciclo de vida" actionListener="#{cicloDeVidaBean.executeAgendador}"/>
+		   </h:form>
+	    
+	       <p><h:outputText value="Após ter submetido o formulário verfique o console." /></p>
+		</ui:define>
+	</ui:composition>
+</html>

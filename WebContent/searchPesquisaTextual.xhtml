@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+   		<ui:define name="cabecalho">
+		   <h:outputText value="Pesquisa textual de movimentações por descrição" />
+    	</ui:define>	
+		   	
+   		<ui:define name="corpo">
+   		
+		   <h:form>
+		    <h:panelGrid columns="3">
+		    	<h:outputText value="Descrição:"/>
+	        	<h:inputText value="#{searchPesquisaTextualBean.descricao}"/> 
+		    	<h:commandButton value="Pesquisar" action="#{searchPesquisaTextualBean.pesquisar}"/>
+		    </h:panelGrid>
+		   </h:form>
+
+	        <h:dataTable value="#{searchPesquisaTextualBean.movimentacoes}" var="movimentacao" rendered="#{searchPesquisaTextualBean.movimentacoes != null}">
+	        	<h:column rendered="false">
+	        		<f:facet name="header">
+	        			<h:outputText value="ID" />
+	        		</f:facet>
+	        		#{movimentacao.id}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Conta" />
+	        		</f:facet>
+	        		#{movimentacao.conta.titular} - #{movimentacao.conta.banco}
+	        	</h:column>
+	        	<h:column>
+					<f:facet name="header">
+						<h:outputText value="Valor" />
+					</f:facet>
+					<h:outputText value="#{movimentacao.valor}" >
+						<f:convertNumber pattern="R$ #0.00"/>
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Data" />
+					</f:facet>
+					<h:outputText value="#{movimentacao.data.time}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</h:column>
+	        	<h:column rendered="true">
+	        		<f:facet name="header">
+	        			<h:outputText value="Descrição" />
+	        		</f:facet>
+	        		#{movimentacao.descricao}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Tipo" />
+	        		</f:facet>
+	        		#{movimentacao.tipoMovimentacao}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header">
+	        			<h:outputText value="Categorias" />
+	        		</f:facet>
+	        		#{movimentacao.categorias}
+	        	</h:column>        	
+	        </h:dataTable>  
+		</ui:define>
+	</ui:composition>
+</html>
