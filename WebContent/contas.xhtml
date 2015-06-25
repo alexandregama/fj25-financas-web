@@ -14,8 +14,8 @@
 	        <h:form>
 	        	<f:validateBean disabled="true">
 			        <h:panelGrid columns="3">
-			        	<h:outputText value="Id" rendered="#{contasBean.conta.id!=null}" />
-			        	<h:inputText id="id" value="#{contasBean.conta.id}" rendered="#{contasBean.conta.id!=null}" readonly="true"/>
+			        	<h:outputText value="Id" rendered="#{contasBean.conta.id != null}" />
+			        	<h:inputText id="id" value="#{contasBean.conta.id}" rendered="#{contasBean.conta.id != null}" readonly="true"/>
 			        	<h:message for="id"  rendered="#{contasBean.conta.id!=null}" />
 			        	
 			        	<h:outputText value="Titular"/>
@@ -34,7 +34,8 @@
 			        	<h:inputText id="numero" value="#{contasBean.conta.numero}"/>
 			        	<h:message for="numero" />
 			        	
-			        	<h:commandButton value="Gravar" action="#{contasBean.grava}"/> 
+			        	<h:commandButton value="Gravar" action="#{contasBean.grava}" rendered="#{contasBean.conta.id == null}"/> 
+			        	<h:commandButton value="Atualizar" action="#{contasBean.grava}" rendered="#{contasBean.conta.id != null}"/> 
 			        </h:panelGrid>
 			    </f:validateBean>
 	        </h:form>
@@ -66,10 +67,10 @@
 	        	<h:column>
 	        		<f:facet name="header"><h:outputText value="Ações"/></f:facet>
 	        		<h:commandLink value="Remover" action="#{contasBean.remove}">
-					<f:setPropertyActionListener value="#{conta}" target="#{contasBean.conta}"/>
+						<f:setPropertyActionListener value="#{conta}" target="#{contasBean.conta}"/>
 	        		</h:commandLink> |
 	        		<h:commandLink value="Alterar">
-					<f:setPropertyActionListener value="#{conta}" target="#{contasBean.conta}"/>
+						<f:setPropertyActionListener value="#{conta}" target="#{contasBean.conta}"/>
 	        		</h:commandLink>
 	        	</h:column>
 	        </h:dataTable>

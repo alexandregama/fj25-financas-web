@@ -32,6 +32,10 @@ public class ContaDao {
 		this.manager.remove(contaParaRemover);
 	}
 
+	public void atualiza(Conta conta) {
+		this.manager.merge(conta);
+	}
+
 }
 
 

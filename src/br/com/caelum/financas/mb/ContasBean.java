@@ -32,7 +32,11 @@ public class ContasBean implements Serializable {
 
 	public void grava() {
 		System.out.println("Gravando a conta");
-		contaDao.adiciona(conta);
+		if (conta.getId() != null) {
+			contaDao.atualiza(conta);
+		} else {
+			contaDao.adiciona(conta);
+		}
 		this.contas = contaDao.lista();
 		
 		limpaFormularioDoJSF();
