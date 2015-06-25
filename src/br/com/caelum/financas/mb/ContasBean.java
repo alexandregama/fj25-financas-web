@@ -48,7 +48,8 @@ public class ContasBean implements Serializable {
 
 	public void remove() {
 		System.out.println("Removendo a conta");
-
+		this.contaDao.remove(conta);
+		this.contas = contaDao.lista();
 		limpaFormularioDoJSF();
 	}
 
