@@ -1,8 +1,6 @@
 package br.com.caelum.financas.mb;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,11 +15,13 @@ public class AgendadorFormBean {
 	@Inject
 	private AgendadorExercicio agendador;
 	
+	@Inject
+	private JsfMessage facesMessage;
+	
 	public void agendar() {
 		agendador.agenda(periodo);
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Agendamento registrado com sucesso"));
+		facesMessage.addInfo("Agendamento registrado com sucesso");
 	}
 
 	public PeriodoAgendamento getPeriodo() {
