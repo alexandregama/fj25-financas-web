@@ -1,10 +1,14 @@
 package br.com.caelum.financas.service;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.ejb.AccessTimeout;
 import javax.ejb.Singleton;
 
 @Singleton
+@AccessTimeout(unit = TimeUnit.SECONDS, value = 5) //javax.ejb.ConcurrentAccessTimeoutException pois o padrão é 500 mili
 public class AgendadorSingleton {
 
 	private static int totalCriado;
