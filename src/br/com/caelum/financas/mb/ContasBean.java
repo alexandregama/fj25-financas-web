@@ -3,6 +3,7 @@ package br.com.caelum.financas.mb;
 import java.io.Serializable;
 import java.util.List;
 
+import br.com.caelum.financas.dao.AgenciaEmBrancoException;
 import br.com.caelum.financas.dao.ContaDao;
 import br.com.caelum.financas.modelo.Conta;
 
@@ -30,7 +31,7 @@ public class ContasBean implements Serializable {
 		this.conta = conta;
 	}
 
-	public void grava() {
+	public void grava() throws AgenciaEmBrancoException {
 		System.out.println("Gravando a conta");
 		if (conta.getId() != null) {
 			contaDao.atualiza(conta);
