@@ -2,6 +2,8 @@ package br.com.caelum.financas.dao;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,13 +15,22 @@ public class ContaDao {
 
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@PostConstruct
+	public void posConstruct() {
+		System.out.println("Criando o ContaDao");
+	}
+	
+	@PreDestroy
+	public void preDestroy() {
+		System.out.println("Destruindo o ContaDao");
+	}
 
 	public void adiciona(Conta conta) throws AgenciaEmBrancoException {
 		this.manager.persist(conta);
 		
 		if (conta.getTitular() == null || conta.getTitular().isEmpty()) {
 			throw new TitularEmBrancoException("Não é permitido Titular em branco"); 
-			//Neste caso temos uma unchecked, ou seja System Exception (mata o bean, faz rollback e lança EJBException) 
 		} 
 		
 		if (conta.getAgencia() == null || conta.getAgencia().isEmpty()) {
