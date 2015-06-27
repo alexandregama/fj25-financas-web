@@ -16,6 +16,10 @@ public class MovimentacaoDao {
 
 	public void adiciona(Movimentacao movimentacao) {
 		this.manager.persist(movimentacao);
+		
+		if (movimentacao.isValorNegativo()) {
+			throw new RuntimeException("Não é permitido valores negativos");
+		}
 	}
 
 	public Movimentacao busca(Integer id) {

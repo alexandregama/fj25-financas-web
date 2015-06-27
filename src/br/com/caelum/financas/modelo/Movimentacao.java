@@ -78,4 +78,8 @@ public class Movimentacao implements Serializable {
 		this.conta = conta;
 	}
 
+	public boolean isValorNegativo() {
+		return this.valor.compareTo(BigDecimal.ZERO) < 0;
+	}
+
 }
