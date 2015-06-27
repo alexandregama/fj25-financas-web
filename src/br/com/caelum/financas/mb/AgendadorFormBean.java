@@ -1,35 +1,35 @@
 package br.com.caelum.financas.mb;
 
-import javax.enterprise.inject.Model;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import br.com.caelum.financas.service.AgendadorExercicio;
 
 @Named
 @RequestScoped
 public class AgendadorFormBean {
 
-	private String expressaoMinutos;
-	private String expressaoSegundos;
+	private PeriodoAgendamento periodo = new PeriodoAgendamento();
+
+	@Inject
+	private AgendadorExercicio agendador;
 	
-
+	@Inject
+	private JsfMessage facesMessage;
+	
 	public void agendar() {
+		agendador.agenda(periodo);
 		
+		facesMessage.addInfo("Agendamento registrado com sucesso");
 	}
 
-	public String getExpressaoMinutos() {
-		return expressaoMinutos;
+	public PeriodoAgendamento getPeriodo() {
+		return periodo;
 	}
 
-	public void setExpressaoMinutos(String expressaoMinutos) {
-		this.expressaoMinutos = expressaoMinutos;
-	}
-
-	public String getExpressaoSegundos() {
-		return expressaoSegundos;
-	}
-
-	public void setExpressaoSegundos(String expressaoSegundos) {
-		this.expressaoSegundos = expressaoSegundos;
+	public void setPeriodo(PeriodoAgendamento periodo) {
+		this.periodo = periodo;
 	}
 
 }
