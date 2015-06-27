@@ -18,7 +18,7 @@ public class MovimentacaoDao {
 		this.manager.persist(movimentacao);
 		
 		if (movimentacao.isValorNegativo()) {
-			throw new RuntimeException("Não é permitido valores negativos");
+			throw new ValorInvalidoException("Não é permitido valores negativos");
 		}
 	}
 
