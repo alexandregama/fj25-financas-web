@@ -10,17 +10,19 @@ import javax.ejb.Timer;
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
 
+import br.com.caelum.financas.mb.PeriodoAgendamento;
+
 @Singleton
 public class AgendadorExercicio {
 
 	@Resource
 	private TimerService timerService;
 	
-	public void agenda(String expressaoEmMinutos, String expressaoEmSegundos) {
+	public void agenda(PeriodoAgendamento periodo) {
 		ScheduleExpression expression = new ScheduleExpression();
 		expression.hour("*");
-		expression.minute(expressaoEmMinutos);
-		expression.second(expressaoEmSegundos);
+		expression.minute(periodo.getExpressaoEmMinutos());
+		expression.second(periodo.getExpressaoEmSegundos());
 		
 		TimerConfig config = new TimerConfig();
 		config.setInfo(expression);

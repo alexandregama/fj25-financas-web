@@ -12,33 +12,24 @@ import br.com.caelum.financas.service.AgendadorExercicio;
 @RequestScoped
 public class AgendadorFormBean {
 
-	private String expressaoMinutos;
-	
-	private String expressaoSegundos;
+	private PeriodoAgendamento periodo = new PeriodoAgendamento();
 
 	@Inject
 	private AgendadorExercicio agendador;
 	
 	public void agendar() {
-		agendador.agenda(expressaoMinutos, expressaoSegundos);
+		agendador.agenda(periodo);
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Agendamento registrado com sucesso"));
 	}
 
-	public String getExpressaoMinutos() {
-		return expressaoMinutos;
+	public PeriodoAgendamento getPeriodo() {
+		return periodo;
 	}
 
-	public void setExpressaoMinutos(String expressaoMinutos) {
-		this.expressaoMinutos = expressaoMinutos;
-	}
-
-	public String getExpressaoSegundos() {
-		return expressaoSegundos;
-	}
-
-	public void setExpressaoSegundos(String expressaoSegundos) {
-		this.expressaoSegundos = expressaoSegundos;
+	public void setPeriodo(PeriodoAgendamento periodo) {
+		this.periodo = periodo;
 	}
 
 }
