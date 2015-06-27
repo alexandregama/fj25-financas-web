@@ -16,6 +16,12 @@ public class ContaDao {
 
 	public void adiciona(Conta conta) {
 		this.manager.persist(conta);
+		
+		if (conta.getTitular() != null || conta.getTitular().isEmpty()) {
+			throw new RuntimeException("Não é permitido Titular em branco"); 
+			//Neste caso temos uma unchecked, ou seja System Exception (mata o bean, faz rollback e lança EJBException) 
+		} 
+	
 	}
 
 	public Conta busca(Integer id) {
