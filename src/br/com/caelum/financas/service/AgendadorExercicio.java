@@ -3,6 +3,7 @@ package br.com.caelum.financas.service;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import javax.ejb.Schedule;
 import javax.ejb.ScheduleExpression;
 import javax.ejb.Singleton;
 import javax.ejb.Timeout;
@@ -35,6 +36,11 @@ public class AgendadorExercicio {
 	public void executa(Timer timer) {
 		System.out.println(timer.getInfo());
 		System.out.println("Executando o Agendador do Exercicio");
+	}
+	
+	@Schedule(hour = "*", minute = "*/1")
+	public void enviaEmailComUltimasMovimentacoes() {
+		System.out.println("Enviando email com as ultimas modificacoes");
 	}
 	
 	@PostConstruct
