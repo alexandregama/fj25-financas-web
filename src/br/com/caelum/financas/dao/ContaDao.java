@@ -14,14 +14,18 @@ public class ContaDao {
 	@PersistenceContext
 	private EntityManager manager;
 
-	public void adiciona(Conta conta) {
+	public void adiciona(Conta conta) throws AgenciaEmBrancoException {
 		this.manager.persist(conta);
 		
-		if (conta.getTitular() != null || conta.getTitular().isEmpty()) {
+		if (conta.getTitular() == null || conta.getTitular().isEmpty()) {
 			throw new TitularEmBrancoException("Não é permitido Titular em branco"); 
 			//Neste caso temos uma unchecked, ou seja System Exception (mata o bean, faz rollback e lança EJBException) 
 		} 
-	
+		
+		if (conta.getAgencia() == null || conta.getAgencia().isEmpty()) {
+			throw new AgenciaEmBrancoException("Não é permitida a Agencia em branco");
+		}
+			
 	}
 
 	public Conta busca(Integer id) {
