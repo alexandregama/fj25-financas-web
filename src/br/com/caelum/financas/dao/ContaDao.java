@@ -26,6 +26,9 @@ public class ContaDao {
 			throw new AgenciaEmBrancoException("Não é permitida a Agencia em branco");
 		}
 			
+		if (conta.getBanco() == null || conta.getBanco().isEmpty()) {
+			throw new BancoEmBrancoException("Não é permitido o Banco em branco");
+		}
 	}
 
 	public Conta busca(Integer id) {
