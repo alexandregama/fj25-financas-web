@@ -12,11 +12,8 @@ public class MovimentacoesPorTitularBean {
 	private List<Movimentacao> movimentacoes;
 	private String titular;
 	
-	
-
 	public void lista() {
 		System.out.println("Buscando as movimentacoes pelo titular da conta " + this.titular);
-
 	}
 
 	public List<Movimentacao> getMovimentacoes() {

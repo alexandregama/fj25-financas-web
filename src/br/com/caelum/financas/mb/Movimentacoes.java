@@ -2,6 +2,7 @@ package br.com.caelum.financas.mb;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
@@ -20,5 +21,7 @@ public interface Movimentacoes {
 	List<Movimentacao> buscaPorConta(Conta conta);
 	
 	List<Movimentacao> listaPorValorETipo(BigDecimal valor, TipoMovimentacao tipo);
+
+	Optional<BigDecimal> valorTotalDa(Conta conta);
 	
 }
