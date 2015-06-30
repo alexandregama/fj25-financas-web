@@ -2,6 +2,7 @@ package br.com.caelum.financas.dao;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -61,6 +62,15 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		query.setParameter("tipo", tipo);
 		
 		return query.getResultList();
+	}
+
+	@Override
+	public Optional<BigDecimal> valorTotalDa(Conta conta) {
+		String jpql = "select sum(m.valor) from Movimentacao m where m.conta = :conta";
+		TypedQuery<BigDecimal> query = manager.createQuery(jpql, BigDecimal.class);
+		query.setParameter("conta", conta);
+		
+		return Optional.ofNullable(query.getSingleResult());
 	}
 
 }
