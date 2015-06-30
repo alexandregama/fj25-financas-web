@@ -1,6 +1,7 @@
 package br.com.caelum.financas.dao;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,6 +72,15 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		query.setParameter("conta", conta);
 		
 		return Optional.ofNullable(query.getSingleResult());
+	}
+
+	@Override
+	public List<Movimentacao> listaPorTitular(String titular) {
+		String jpql = "select m from Movimentacao m where m.conta.titular like :titular";
+		TypedQuery<Movimentacao> query = manager.createQuery(jpql, Movimentacao.class);
+		query.setParameter("titular", "%" + titular + "%");
+		
+		return query.getResultList() == null ? Arrays.asList() : query.getResultList();
 	}
 
 }
