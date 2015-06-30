@@ -21,12 +21,12 @@ public class MovimentacoesBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private MovimentacaoDao movimentacoesDao;
+	private Movimentacoes movimentacoes;
 	
 	@Inject
 	private ContaDao contas;
 	
-	private List<Movimentacao> movimentacoes;
+	private List<Movimentacao> listaDeMovimentacoes;
 	private Movimentacao movimentacao = new Movimentacao();
 	private Integer contaId;
 	private Integer categoriaId;
@@ -36,8 +36,8 @@ public class MovimentacoesBean implements Serializable {
 		
 		Conta contaSelecionada = contas.busca(contaId);
 		movimentacao.setConta(contaSelecionada);
-		movimentacoesDao.adiciona(movimentacao);
-		movimentacoes = movimentacoesDao.lista();
+		movimentacoes.adiciona(movimentacao);
+		listaDeMovimentacoes = movimentacoes.lista();
 		
 		limpaFormularioDoJSF();
 	}
@@ -45,17 +45,17 @@ public class MovimentacoesBean implements Serializable {
 	public void remove() {
 		System.out.println("Removendo a movimentacao");
 		
-		movimentacoesDao.remove(movimentacao);
-		movimentacoes = movimentacoesDao.lista();
+		movimentacoes.remove(movimentacao);
+		listaDeMovimentacoes = movimentacoes.lista();
 		
 		limpaFormularioDoJSF();
 	}
 
 	public List<Movimentacao> getMovimentacoes() {
-		if (movimentacoes == null) {
-			movimentacoes = movimentacoesDao.lista();
+		if (listaDeMovimentacoes == null) {
+			listaDeMovimentacoes = movimentacoes.lista();
 		}
-		return movimentacoes;
+		return listaDeMovimentacoes;
 	}
 	
 	public Movimentacao getMovimentacao() {
