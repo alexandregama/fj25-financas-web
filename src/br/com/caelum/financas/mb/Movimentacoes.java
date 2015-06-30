@@ -23,5 +23,7 @@ public interface Movimentacoes {
 	List<Movimentacao> listaPorValorETipo(BigDecimal valor, TipoMovimentacao tipo);
 
 	Optional<BigDecimal> valorTotalDa(Conta conta);
+
+	List<Movimentacao> listaPorTitular(String titular);
 	
 }
