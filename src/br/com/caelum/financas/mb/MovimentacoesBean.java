@@ -31,7 +31,6 @@ public class MovimentacoesBean implements Serializable {
 	private Integer contaId;
 	private Integer categoriaId;
 	
-	
 	public void grava() {
 		System.out.println("Fazendo a gravacao da movimentacao");
 		
@@ -43,7 +42,6 @@ public class MovimentacoesBean implements Serializable {
 		limpaFormularioDoJSF();
 	}
 	
-
 	public void remove() {
 		System.out.println("Removendo a movimentacao");
 		
@@ -78,7 +76,6 @@ public class MovimentacoesBean implements Serializable {
 	public void setContaId(Integer contaId) {
 		this.contaId = contaId;
 	}
-	
 
 	public Integer getCategoriaId() {
 		return categoriaId;

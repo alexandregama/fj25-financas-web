@@ -5,7 +5,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
+import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 
 @Stateless
@@ -33,6 +35,14 @@ public class MovimentacaoDao {
 	public void remove(Movimentacao movimentacao) {
 		Movimentacao movimentacaoParaRemover = this.manager.find(Movimentacao.class, movimentacao.getId());
 		this.manager.remove(movimentacaoParaRemover);
+	}
+	
+	public List<Movimentacao> buscaPorConta(Conta conta) {
+		String sql = "select m from Movimentacao m where m.conta = :conta";
+		TypedQuery<Movimentacao> query = manager.createQuery(sql, Movimentacao.class);
+		query.setParameter("conta", conta);
+		
+		return query.getResultList();
 	}
 
 }
