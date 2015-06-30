@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.caelum.financas.dao.ContaDao;
-import br.com.caelum.financas.dao.MovimentacaoDao;
+import br.com.caelum.financas.dao.HibernateMovimentacaoDao;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;

@@ -1,5 +1,6 @@
 package br.com.caelum.financas.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -10,9 +11,10 @@ import javax.persistence.TypedQuery;
 import br.com.caelum.financas.mb.Movimentacoes;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
+import br.com.caelum.financas.modelo.TipoMovimentacao;
 
 @Stateless
-public class MovimentacaoDao implements Movimentacoes {
+public class HibernateMovimentacaoDao implements Movimentacoes {
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -47,6 +49,16 @@ public class MovimentacaoDao implements Movimentacoes {
 		String sql = "select m from Movimentacao m where m.conta = :conta";
 		TypedQuery<Movimentacao> query = manager.createQuery(sql, Movimentacao.class);
 		query.setParameter("conta", conta);
+		
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Movimentacao> listaPorValorETipo(BigDecimal valor, TipoMovimentacao tipo) {
+		String sql = "select m from Movimentacao m where m.valor <= :valor and m.tipoMovimentacao = :tipo";
+		TypedQuery<Movimentacao> query = manager.createQuery(sql, Movimentacao.class);
+		query.setParameter("valor", valor);
+		query.setParameter("tipo", tipo);
 		
 		return query.getResultList();
 	}
