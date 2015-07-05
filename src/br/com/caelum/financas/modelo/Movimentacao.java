@@ -30,6 +30,13 @@ public class Movimentacao implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoMovimentacao tipoMovimentacao;
 	
+	@Override
+	public String toString() {
+		return "Movimentacao [id=" + id + ", descricao=" + descricao
+				+ ", data=" + data + ", valor=" + valor + ", conta=" + conta
+				+ ", tipoMovimentacao=" + tipoMovimentacao + "]";
+	}
+
 	public TipoMovimentacao getTipoMovimentacao() {
 		return tipoMovimentacao;
 	}

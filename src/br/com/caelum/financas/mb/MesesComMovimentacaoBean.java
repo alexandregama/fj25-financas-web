@@ -1,6 +1,5 @@
 package br.com.caelum.financas.mb;
 
-
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
 import javax.enterprise.context.RequestScoped;
@@ -14,9 +13,8 @@ public class MesesComMovimentacaoBean {
 
 	private TipoMovimentacao tipoMovimentacao;
 	
-	public void lista() {
+	public void pesquisa() {
 		System.out.println("Listando as contas pelos valores movimentados no mes");
-
 	}
 
 	public TipoMovimentacao getTipoMovimentacao() {

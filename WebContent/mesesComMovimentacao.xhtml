@@ -25,7 +25,7 @@
 				   		<f:selectItems value="#{movimentacoesBean.tiposDeMovimentacao}" />
 				   	</h:selectOneMenu>
 			     	
-			  		<h:commandButton value="Pesquisar" action="#{mesesComMovimentacaoBean.lista}"/>
+			  		<h:commandButton value="Pesquisar" action="#{mesesComMovimentacaoBean.pesquisa}"/>
 				</h:panelGrid>
 			</h:form>
     
@@ -46,9 +46,9 @@
 	        	</h:column>
 	        	<h:column>
 	        		<f:facet name="header">
-	        			<h:outputText value="Valor" />
+	        			<h:outputText value="Total" />
 	        		</f:facet>
-	        		#{valorPorMesEAno.valor}
+	        		#{valorPorMesEAno.total}
 	        	</h:column>
 	        </h:dataTable>
     		</ui:define>

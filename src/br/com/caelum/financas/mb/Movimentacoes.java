@@ -25,5 +25,7 @@ public interface Movimentacoes {
 	Optional<BigDecimal> valorTotalDa(Conta conta);
 
 	List<Movimentacao> listaPorTitular(String titular);
+
+	List<ValorPorMesEAno> listaMesesComMovimentacoes();
 	
 }

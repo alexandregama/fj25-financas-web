@@ -1,6 +1,7 @@
 package br.com.caelum.financas.dao;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +9,11 @@ import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.mb.Movimentacoes;
+import br.com.caelum.financas.mb.ValorPorMesEAno;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
@@ -83,4 +86,22 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		return query.getResultList() == null ? Arrays.asList() : query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<ValorPorMesEAno> listaMesesComMovimentacoes() {
+		String jpql = "select sum(m.valor), month(m.data), year(m.data) from Movimentacao m group by year(m.data), month(m.data)";
+		Query query = manager.createQuery(jpql);
+		List<Object[]> movimentacoes = query.getResultList();
+		
+		List<ValorPorMesEAno> lista = new ArrayList<>();
+		for (Object[] objects : movimentacoes) {
+			int ano = (int) objects[2];
+			int mes = (int) objects[1];
+			BigDecimal soma = (BigDecimal) objects[0];
+			
+			ValorPorMesEAno valorPorMesEAno = new ValorPorMesEAno(ano, mes, soma);
+			lista.add(valorPorMesEAno);
+		}
+		
+		return lista;
+	}
 }
