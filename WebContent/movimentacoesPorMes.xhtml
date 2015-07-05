@@ -24,7 +24,9 @@
     			
     			<h:column>
     				<f:facet name="header">Total</f:facet>
-    				#{movimentacao.total}
+    				<h:outputText value="#{movimentacao.total}">
+    					<f:convertNumber pattern="R$ #0.00"/>
+    				</h:outputText>
     			</h:column>
     		</h:dataTable>
     	</ui:define>
