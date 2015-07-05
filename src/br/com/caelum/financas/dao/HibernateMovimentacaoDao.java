@@ -104,4 +104,26 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		
 		return lista;
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ValorPorMesEAno> listaMesesComMovimentacoesPorContaETipo(Conta conta, TipoMovimentacao tipoMovimentacao) {
+		String jpql = "select sum(m.valor), month(m.data), year(m.data) from Movimentacao m where m.conta = :conta and m.tipoMovimentacao = :tipo group by year(m.data), month(m.data)";
+		Query query = manager.createQuery(jpql);
+		query.setParameter("conta", conta);
+		query.setParameter("tipo", tipoMovimentacao);
+		List<Object[]> movimentacoes = query.getResultList();
+		
+		List<ValorPorMesEAno> lista = new ArrayList<>();
+		for (Object[] objects : movimentacoes) {
+			int ano = (int) objects[2];
+			int mes = (int) objects[1];
+			BigDecimal soma = (BigDecimal) objects[0];
+			
+			ValorPorMesEAno valorPorMesEAno = new ValorPorMesEAno(ano, mes, soma);
+			lista.add(valorPorMesEAno);
+		}
+		
+		return lista;
+	}
 }

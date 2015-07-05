@@ -27,5 +27,8 @@ public interface Movimentacoes {
 	List<Movimentacao> listaPorTitular(String titular);
 
 	List<ValorPorMesEAno> listaMesesComMovimentacoes();
+
+	List<ValorPorMesEAno> listaMesesComMovimentacoesPorContaETipo(Conta conta,
+			TipoMovimentacao tipoMovimentacao);
 	
 }

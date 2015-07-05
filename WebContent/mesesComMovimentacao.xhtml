@@ -31,7 +31,7 @@
     
 	        <h2><h:outputText value="Todas as Movimentações" /></h2>
 	        <hr />
-	        <h:dataTable value="#{mesesComMovimentacaoBean.valoresPorMesEAno}" var="valorPorMesEAno">
+	        <h:dataTable value="#{mesesComMovimentacaoBean.lista}" var="valorPorMesEAno">
 	        	<h:column>
 	        		<f:facet name="header">
 	        			<h:outputText value="Mês" />
@@ -48,7 +48,9 @@
 	        		<f:facet name="header">
 	        			<h:outputText value="Total" />
 	        		</f:facet>
-	        		#{valorPorMesEAno.total}
+	        		<h:outputText value="#{valorPorMesEAno.total}">
+	        			<f:convertNumber pattern="R$ #0.00"/>
+	        		</h:outputText>
 	        	</h:column>
 	        </h:dataTable>
     		</ui:define>
