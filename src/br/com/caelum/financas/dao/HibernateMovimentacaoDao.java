@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.mb.Movimentacoes;
+import br.com.caelum.financas.mb.ValorPorMesEAno;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
@@ -83,4 +84,37 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		return query.getResultList() == null ? Arrays.asList() : query.getResultList();
 	}
 
+	public List<ValorPorMesEAno> listaMesesComMovimentacoes() {
+		String jpql = "select " +
+					  "   new br.com.caelum.financas.mb.ValorPorMesEAno(year(m.data), month(m.data), sum(m.valor)) " +
+					  "from " +
+					  "	  Movimentacao m " +
+					  "group by " +
+					  "	  year(m.data), month(m.data)";
+		
+		TypedQuery<ValorPorMesEAno> query = manager.createQuery(jpql, ValorPorMesEAno.class);
+		List<ValorPorMesEAno> movimentacoes = query.getResultList();
+		
+		return movimentacoes;
+	}
+
+	@Override
+	public List<ValorPorMesEAno> listaMesesComMovimentacoesPorContaETipo(Conta conta, TipoMovimentacao tipoMovimentacao) {
+		String jpql = "select " +
+				 	  "   new br.com.caelum.financas.mb.ValorPorMesEAno(year(m.data), month(m.data), sum(m.valor)) " + 
+					  "from " +
+					  "	  Movimentacao m " +
+					  "where " +
+					  "	  m.conta = :conta and m.tipoMovimentacao = :tipo " +
+					  "group by " +
+					  "   year(m.data), month(m.data)";
+		
+		TypedQuery<ValorPorMesEAno> query = manager.createQuery(jpql, ValorPorMesEAno.class);
+		query.setParameter("conta", conta);
+		query.setParameter("tipo", tipoMovimentacao);
+		
+		List<ValorPorMesEAno> movimentacoes = query.getResultList();
+		
+		return movimentacoes;
+	}
 }
