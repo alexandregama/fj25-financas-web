@@ -8,7 +8,6 @@ import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.mb.Movimentacoes;
@@ -85,7 +84,6 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		return query.getResultList() == null ? Arrays.asList() : query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<ValorPorMesEAno> listaMesesComMovimentacoes() {
 		String jpql = "select " +
 					  "   new br.com.caelum.financas.mb.ValorPorMesEAno(year(m.data), month(m.data), sum(m.valor)) " +
@@ -94,14 +92,13 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 					  "group by " +
 					  "	  year(m.data), month(m.data)";
 		
-		Query query = manager.createQuery(jpql);
+		TypedQuery<ValorPorMesEAno> query = manager.createQuery(jpql, ValorPorMesEAno.class);
 		List<ValorPorMesEAno> movimentacoes = query.getResultList();
 		
 		return movimentacoes;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<ValorPorMesEAno> listaMesesComMovimentacoesPorContaETipo(Conta conta, TipoMovimentacao tipoMovimentacao) {
 		String jpql = "select " +
 				 	  "   new br.com.caelum.financas.mb.ValorPorMesEAno(year(m.data), month(m.data), sum(m.valor)) " + 
@@ -112,7 +109,7 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 					  "group by " +
 					  "   year(m.data), month(m.data)";
 		
-		Query query = manager.createQuery(jpql);
+		TypedQuery<ValorPorMesEAno> query = manager.createQuery(jpql, ValorPorMesEAno.class);
 		query.setParameter("conta", conta);
 		query.setParameter("tipo", tipoMovimentacao);
 		
