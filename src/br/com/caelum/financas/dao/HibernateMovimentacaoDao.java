@@ -117,4 +117,28 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		
 		return movimentacoes;
 	}
+	
+	@Override
+	public List<ValorPorMesEAno> listaMesesComMovimentacoesPorContaETipoETotalMinimo(Conta conta, TipoMovimentacao tipoMovimentacao, BigDecimal totalMinimo) {
+		String jpql = "select " +
+				"   new br.com.caelum.financas.mb.ValorPorMesEAno(year(m.data), month(m.data), sum(m.valor)) " + 
+				"from " +
+				"	  Movimentacao m " +
+				"where " +
+				"	  m.conta = :conta and m.tipoMovimentacao = :tipo " +
+				"group by " +
+				"   year(m.data), month(m.data)" +
+				"having " +
+				"	sum(m.valor) > :minimo";
+		
+		TypedQuery<ValorPorMesEAno> query = manager.createQuery(jpql, ValorPorMesEAno.class);
+		query.setParameter("conta", conta);
+		query.setParameter("tipo", tipoMovimentacao);
+		query.setParameter("minimo", totalMinimo);
+		
+		List<ValorPorMesEAno> movimentacoes = query.getResultList();
+		
+		return movimentacoes;
+	}
+	
 }
