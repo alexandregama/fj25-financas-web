@@ -1,7 +1,6 @@
 package br.com.caelum.financas.dao;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -88,42 +87,37 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 
 	@SuppressWarnings("unchecked")
 	public List<ValorPorMesEAno> listaMesesComMovimentacoes() {
-		String jpql = "select sum(m.valor), month(m.data), year(m.data) from Movimentacao m group by year(m.data), month(m.data)";
+		String jpql = "select " +
+					  "   new br.com.caelum.financas.mb.ValorPorMesEAno(year(m.data), month(m.data), sum(m.valor)) " +
+					  "from " +
+					  "	  Movimentacao m " +
+					  "group by " +
+					  "	  year(m.data), month(m.data)";
+		
 		Query query = manager.createQuery(jpql);
-		List<Object[]> movimentacoes = query.getResultList();
+		List<ValorPorMesEAno> movimentacoes = query.getResultList();
 		
-		List<ValorPorMesEAno> lista = new ArrayList<>();
-		for (Object[] objects : movimentacoes) {
-			int ano = (int) objects[2];
-			int mes = (int) objects[1];
-			BigDecimal soma = (BigDecimal) objects[0];
-			
-			ValorPorMesEAno valorPorMesEAno = new ValorPorMesEAno(ano, mes, soma);
-			lista.add(valorPorMesEAno);
-		}
-		
-		return lista;
+		return movimentacoes;
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<ValorPorMesEAno> listaMesesComMovimentacoesPorContaETipo(Conta conta, TipoMovimentacao tipoMovimentacao) {
-		String jpql = "select sum(m.valor), month(m.data), year(m.data) from Movimentacao m where m.conta = :conta and m.tipoMovimentacao = :tipo group by year(m.data), month(m.data)";
+		String jpql = "select " +
+				 	  "   new br.com.caelum.financas.mb.ValorPorMesEAno(year(m.data), month(m.data), sum(m.valor)) " + 
+					  "from " +
+					  "	  Movimentacao m " +
+					  "where " +
+					  "	  m.conta = :conta and m.tipoMovimentacao = :tipo " +
+					  "group by " +
+					  "   year(m.data), month(m.data)";
+		
 		Query query = manager.createQuery(jpql);
 		query.setParameter("conta", conta);
 		query.setParameter("tipo", tipoMovimentacao);
-		List<Object[]> movimentacoes = query.getResultList();
 		
-		List<ValorPorMesEAno> lista = new ArrayList<>();
-		for (Object[] objects : movimentacoes) {
-			int ano = (int) objects[2];
-			int mes = (int) objects[1];
-			BigDecimal soma = (BigDecimal) objects[0];
-			
-			ValorPorMesEAno valorPorMesEAno = new ValorPorMesEAno(ano, mes, soma);
-			lista.add(valorPorMesEAno);
-		}
+		List<ValorPorMesEAno> movimentacoes = query.getResultList();
 		
-		return lista;
+		return movimentacoes;
 	}
 }
