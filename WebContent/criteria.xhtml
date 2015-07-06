@@ -14,7 +14,9 @@
 		
 			<h3><h:outputText value="Listar todas as Movimentações" /></h3>
 			<h:form>
-					<h:commandButton value="Listar" action="#{criteriaBean.listarTodasAsMovimentacoes}"/>
+					<h:commandButton value="Listar com Criteria" action="#{criteriaBean.listarTodasAsMovimentacoes}"/><br/>
+					
+					<h:commandButton value="Listar com Criteria reduzida" action="#{criteriaBean.listarTodasAsMovimentacoesCriteriaReduzida}"/>
 			</h:form>
 	    
 	        <h:dataTable value="#{criteriaBean.movimentacoes}" var="movimentacao" rendered="#{criteriaBean.movimentacoes != null}">

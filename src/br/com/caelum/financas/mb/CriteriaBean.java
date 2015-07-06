@@ -33,6 +33,10 @@ public class CriteriaBean {
 	public void listarTodasAsMovimentacoes() {
 		this.lista = movimentacoes.listaMovimentacoesPorCriteria();
 	}
+	
+	public void listarTodasAsMovimentacoesCriteriaReduzida() {
+		this.lista = movimentacoes.listaMovimentacoesPorCriteriaReduzida();
+	}
 
 	public void somaMovimentacoesDoTitular() {
 

@@ -152,5 +152,14 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		TypedQuery<Movimentacao> query = manager.createQuery(criteriaQuery);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Movimentacao> listaMovimentacoesPorCriteriaReduzida() {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Movimentacao> criteriaQuery = builder.createQuery(Movimentacao.class);
+		criteriaQuery.from(Movimentacao.class);
+		
+		return manager.createQuery(criteriaQuery).getResultList();
+	}
 	
 }

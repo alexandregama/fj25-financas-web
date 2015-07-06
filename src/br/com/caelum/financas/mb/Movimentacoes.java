@@ -35,5 +35,7 @@ public interface Movimentacoes {
 			Conta conta, TipoMovimentacao tipoMovimentacao, BigDecimal totalMinimo);
 
 	List<Movimentacao> listaMovimentacoesPorCriteria();
+
+	List<Movimentacao> listaMovimentacoesPorCriteriaReduzida();
 	
 }
