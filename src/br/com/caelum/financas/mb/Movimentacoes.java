@@ -33,5 +33,7 @@ public interface Movimentacoes {
 
 	List<ValorPorMesEAno> listaMesesComMovimentacoesPorContaETipoETotalMinimo(
 			Conta conta, TipoMovimentacao tipoMovimentacao, BigDecimal totalMinimo);
+
+	List<Movimentacao> listaMovimentacoesPorCriteria();
 	
 }

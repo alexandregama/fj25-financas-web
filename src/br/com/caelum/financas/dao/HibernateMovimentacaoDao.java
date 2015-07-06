@@ -9,6 +9,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.caelum.financas.mb.Movimentacoes;
 import br.com.caelum.financas.mb.ValorPorMesEAno;
@@ -139,6 +141,16 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		List<ValorPorMesEAno> movimentacoes = query.getResultList();
 		
 		return movimentacoes;
+	}
+
+	@Override
+	public List<Movimentacao> listaMovimentacoesPorCriteria() {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Movimentacao> criteriaQuery = builder.createQuery(Movimentacao.class);
+		criteriaQuery.from(Movimentacao.class);
+		
+		TypedQuery<Movimentacao> query = manager.createQuery(criteriaQuery);
+		return query.getResultList();
 	}
 	
 }
