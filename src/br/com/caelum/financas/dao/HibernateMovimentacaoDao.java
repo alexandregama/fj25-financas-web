@@ -187,5 +187,20 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		
 		return query.getSingleResult();
 	}
+
+	@Override
+	public BigDecimal listaPorTitularDaContaComCriteriaReduzida(String nomeTitular) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
+		
+		Root<Movimentacao> root = criteria.from(Movimentacao.class);
+		
+		criteria.select(builder.sum(root.<BigDecimal>get("valor")));
+		criteria.where(builder.equal(root.<Conta>get("conta").<String>get("titular"), nomeTitular));
+		
+		TypedQuery<BigDecimal> query = manager.createQuery(criteria);
+		
+		return query.getSingleResult();
+	}
 	
 }
