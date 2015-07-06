@@ -37,5 +37,7 @@ public interface Movimentacoes {
 	List<Movimentacao> listaMovimentacoesPorCriteria();
 
 	List<Movimentacao> listaMovimentacoesPorCriteriaReduzida();
+
+	BigDecimal listaPorTitularDaContaComCriteria(String titular);
 	
 }
