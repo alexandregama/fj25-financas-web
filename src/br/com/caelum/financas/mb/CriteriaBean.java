@@ -39,7 +39,11 @@ public class CriteriaBean {
 	}
 
 	public void somaMovimentacoesDoTitular() {
-
+		this.soma = movimentacoes.listaPorTitularDaContaComCriteria(titular);
+	}
+	
+	public void somaMovimentacoesDoTitularComCriteriaReduzida() {
+		this.soma = movimentacoes.listaPorTitularDaContaComCriteriaReduzida(titular);
 	}
 	
 	public List<Movimentacao> getMovimentacoes() {

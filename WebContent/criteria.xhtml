@@ -61,8 +61,13 @@
 			
 	        <h3><h:outputText value="Total movimentado do Titular" /></h3>
 			<h:form>
-				<h:inputText value="#{criteriaBean.titular}" />
-				<h:commandButton value="Somar" action="#{criteriaBean.somaMovimentacoesDoTitular}"/>
+				<h:panelGrid columns="2">
+					<h:inputText value="#{criteriaBean.titular}" />
+					<h:commandButton value="Somar por Criteria" action="#{criteriaBean.somaMovimentacoesDoTitular}"/>
+					
+					<h:inputText value="#{criteriaBean.titular}" />
+					<h:commandButton value="Somar por Criteria reduzida" action="#{criteriaBean.somaMovimentacoesDoTitularComCriteriaReduzida}"/>
+				</h:panelGrid>
 			</h:form>
 			<br />
 			Soma: <h:outputText value="#{criteriaBean.soma}" />
