@@ -17,8 +17,16 @@ public class MovimentacoesDaContaBean {
 	
 	private Conta conta = new Conta();
 	
-	@Inject
 	private Movimentacoes movimentacoes;
+	
+	@Inject
+	public MovimentacoesDaContaBean(Movimentacoes movimentacoes) {
+		this.movimentacoes = movimentacoes;
+	}
+	
+	@Deprecated //CDI eyes only
+	MovimentacoesDaContaBean() {
+	}
 	
 	public void lista() {
 		this.listaDeMovimentacoes = movimentacoes.buscaPorConta(conta);

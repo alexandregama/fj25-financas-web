@@ -11,11 +11,11 @@ import javax.persistence.PersistenceContext;
 import br.com.caelum.financas.modelo.Conta;
 
 @Stateless
-public class ContaDao {
+public class HibernateContaDao implements Contas {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@PostConstruct
 	public void posConstruct() {
 		System.out.println("Criando o ContaDao");
@@ -26,6 +26,7 @@ public class ContaDao {
 		System.out.println("Destruindo o ContaDao");
 	}
 
+	@Override
 	public void adiciona(Conta conta) throws AgenciaEmBrancoException {
 		this.manager.persist(conta);
 		
@@ -41,21 +42,25 @@ public class ContaDao {
 			throw new BancoEmBrancoException("Não é permitido o Banco em branco");
 		}
 	}
-
+	
+	@Override
 	public Conta busca(Integer id) {
 		return this.manager.find(Conta.class, id);
 	}
 
+	@Override
 	public List<Conta> lista() {
 		return this.manager.createQuery("select c from Conta c", Conta.class)
 				.getResultList();
 	}
 
+	@Override
 	public void remove(Conta conta) {
 		Conta contaParaRemover = this.manager.find(Conta.class, conta.getId());
 		this.manager.remove(contaParaRemover);
 	}
 
+	@Override
 	public void atualiza(Conta conta) {
 		this.manager.merge(conta);
 	}

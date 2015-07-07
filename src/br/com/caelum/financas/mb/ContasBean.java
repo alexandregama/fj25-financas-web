@@ -3,13 +3,13 @@ package br.com.caelum.financas.mb;
 import java.io.Serializable;
 import java.util.List;
 
-import br.com.caelum.financas.dao.AgenciaEmBrancoException;
-import br.com.caelum.financas.dao.ContaDao;
-import br.com.caelum.financas.modelo.Conta;
-
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import br.com.caelum.financas.dao.AgenciaEmBrancoException;
+import br.com.caelum.financas.dao.Contas;
+import br.com.caelum.financas.modelo.Conta;
 
 @Named
 @ViewScoped
@@ -18,11 +18,16 @@ public class ContasBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private ContaDao contaDao;
+    private Contas contas;
     
 	private Conta conta = new Conta();
-	private List<Conta> contas;
+	
+	private List<Conta> lista;
 
+	public ContasBean(Contas contas) {
+		this.contas = contas;
+	}
+	
 	public Conta getConta() {
 		return conta;
 	}
@@ -34,27 +39,27 @@ public class ContasBean implements Serializable {
 	public void grava() throws AgenciaEmBrancoException {
 		System.out.println("Gravando a conta");
 		if (conta.getId() != null) {
-			contaDao.atualiza(conta);
+			contas.atualiza(conta);
 		} else {
-			contaDao.adiciona(conta);
+			contas.adiciona(conta);
 		}
-		this.contas = contaDao.lista();
+		this.lista = contas.lista();
 		
 		limpaFormularioDoJSF();
 	}
 
 	public List<Conta> getContas() {
 		System.out.println("Listando as contas");
-		if (this.contas == null) {
-			this.contas = contaDao.lista();
+		if (this.lista == null) {
+			this.lista = contas.lista();
 		}
-		return contas;
+		return lista;
 	}
 
 	public void remove() {
 		System.out.println("Removendo a conta");
-		this.contaDao.remove(conta);
-		this.contas = contaDao.lista();
+		this.contas.remove(conta);
+		this.lista = contas.lista();
 		limpaFormularioDoJSF();
 	}
 
