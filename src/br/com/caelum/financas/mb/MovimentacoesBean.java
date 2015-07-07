@@ -3,12 +3,15 @@ package br.com.caelum.financas.mb;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.caelum.financas.dao.Categorias;
 import br.com.caelum.financas.dao.Contas;
+import br.com.caelum.financas.modelo.Categoria;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
@@ -25,15 +28,20 @@ public class MovimentacoesBean implements Serializable {
 	@Inject
 	private Contas contas;
 	
+	private List<Categoria> listaCategorias;
+	
 	private List<Movimentacao> listaDeMovimentacoes;
 	private Movimentacao movimentacao = new Movimentacao();
 	private Integer contaId;
-	private Integer categoriaId;
+	private Long categoriaId;
+
+	private Categorias categorias;
 	
 	@Inject
-	public MovimentacoesBean(Movimentacoes movimentacoes, Contas contas) {
+	public MovimentacoesBean(Movimentacoes movimentacoes, Contas contas, Categorias categorias) {
 		this.movimentacoes = movimentacoes;
 		this.contas = contas;
+		this.categorias = categorias;
 	}
 	
 	@Deprecated //CDI eyes only
@@ -74,6 +82,20 @@ public class MovimentacoesBean implements Serializable {
 		return movimentacao;
 	}
 
+	public List<Categoria> getListaCategorias() {
+		if (listaCategorias == null) {
+			listaCategorias = categorias.lista();
+		}
+		return listaCategorias;
+	}
+	
+	public void adicionaCategoria() {
+		Optional<Categoria> categoria = categorias.buscaPor(categoriaId);
+		if (categoria.isPresent()) {
+			movimentacao.adiciona(categoria.get());
+		}
+	}
+	
 	public void setMovimentacao(Movimentacao movimentacao) {
 		this.movimentacao = movimentacao;
 	}
@@ -86,11 +108,11 @@ public class MovimentacoesBean implements Serializable {
 		this.contaId = contaId;
 	}
 
-	public Integer getCategoriaId() {
+	public Long getCategoriaId() {
 		return categoriaId;
 	}
 
-	public void setCategoriaId(Integer categoriaId) {
+	public void setCategoriaId(Long categoriaId) {
 		this.categoriaId = categoriaId;
 	}
 

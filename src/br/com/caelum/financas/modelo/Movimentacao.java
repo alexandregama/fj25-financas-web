@@ -2,7 +2,9 @@ package br.com.caelum.financas.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -30,11 +33,18 @@ public class Movimentacao implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoMovimentacao tipoMovimentacao;
 	
+	@ManyToMany
+	private List<Categoria> categorias = new ArrayList<>();
+	
 	@Override
 	public String toString() {
 		return "Movimentacao [id=" + id + ", descricao=" + descricao
 				+ ", data=" + data + ", valor=" + valor + ", conta=" + conta
 				+ ", tipoMovimentacao=" + tipoMovimentacao + "]";
+	}
+	
+	public void adiciona(Categoria categoria) {
+		categorias.add(categoria);
 	}
 
 	public TipoMovimentacao getTipoMovimentacao() {
@@ -87,6 +97,10 @@ public class Movimentacao implements Serializable {
 
 	public boolean isValorNegativo() {
 		return this.valor.compareTo(BigDecimal.ZERO) < 0;
+	}
+	
+	public List<Categoria> getCategorias() {
+		return categorias;
 	}
 
 }

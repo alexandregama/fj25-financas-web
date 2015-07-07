@@ -17,15 +17,19 @@ public class ContasBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
-    @Inject
     private Contas contas;
     
 	private Conta conta = new Conta();
 	
 	private List<Conta> lista;
 
+	@Inject
 	public ContasBean(Contas contas) {
 		this.contas = contas;
+	}
+
+	@Deprecated
+	ContasBean() {
 	}
 	
 	public Conta getConta() {
@@ -48,10 +52,10 @@ public class ContasBean implements Serializable {
 		limpaFormularioDoJSF();
 	}
 
-	public List<Conta> getContas() {
+	public List<Conta> getLista() {
 		System.out.println("Listando as contas");
-		if (this.lista == null) {
-			this.lista = contas.lista();
+		if (lista == null) {
+			lista = contas.lista();
 		}
 		return lista;
 	}
