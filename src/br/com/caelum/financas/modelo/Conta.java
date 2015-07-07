@@ -25,7 +25,7 @@ public class Conta implements Serializable {
 	private String numero;
 	private String banco;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "conta")
 	private List<Movimentacao> movimentacoes;
 
 	public Integer getId() {
