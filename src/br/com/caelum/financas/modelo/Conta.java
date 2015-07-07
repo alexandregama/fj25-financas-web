@@ -72,4 +72,8 @@ public class Conta implements Serializable {
 		return Collections.unmodifiableList(movimentacoes);
 	}
 
+	public int quantidadeDeMovimentacoes() {
+		return this.movimentacoes.size();
+	}
+
 }
