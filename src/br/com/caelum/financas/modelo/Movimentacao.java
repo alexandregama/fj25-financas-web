@@ -42,6 +42,10 @@ public class Movimentacao implements Serializable {
 				+ ", data=" + data + ", valor=" + valor + ", conta=" + conta
 				+ ", tipoMovimentacao=" + tipoMovimentacao + "]";
 	}
+	
+	public void adiciona(Categoria categoria) {
+		categorias.add(categoria);
+	}
 
 	public TipoMovimentacao getTipoMovimentacao() {
 		return tipoMovimentacao;

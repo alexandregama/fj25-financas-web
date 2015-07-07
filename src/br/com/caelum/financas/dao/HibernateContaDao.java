@@ -7,6 +7,7 @@ import javax.annotation.PreDestroy;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.modelo.Conta;
 
@@ -50,8 +51,10 @@ public class HibernateContaDao implements Contas {
 
 	@Override
 	public List<Conta> lista() {
-		return this.manager.createQuery("select c from Conta c", Conta.class)
-				.getResultList();
+		String jpql = "select c from Conta c";
+		TypedQuery<Conta> query = manager.createQuery(jpql, Conta.class);
+		
+		return query.getResultList();
 	}
 
 	@Override

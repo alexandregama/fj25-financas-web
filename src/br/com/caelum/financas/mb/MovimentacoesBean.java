@@ -3,6 +3,7 @@ package br.com.caelum.financas.mb;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -32,7 +33,7 @@ public class MovimentacoesBean implements Serializable {
 	private List<Movimentacao> listaDeMovimentacoes;
 	private Movimentacao movimentacao = new Movimentacao();
 	private Integer contaId;
-	private Integer categoriaId;
+	private Long categoriaId;
 
 	private Categorias categorias;
 	
@@ -88,6 +89,13 @@ public class MovimentacoesBean implements Serializable {
 		return listaCategorias;
 	}
 	
+	public void adicionaCategoria() {
+		Optional<Categoria> categoria = categorias.buscaPor(categoriaId);
+		if (categoria.isPresent()) {
+			movimentacao.adiciona(categoria.get());
+		}
+	}
+	
 	public void setMovimentacao(Movimentacao movimentacao) {
 		this.movimentacao = movimentacao;
 	}
@@ -100,11 +108,11 @@ public class MovimentacoesBean implements Serializable {
 		this.contaId = contaId;
 	}
 
-	public Integer getCategoriaId() {
+	public Long getCategoriaId() {
 		return categoriaId;
 	}
 
-	public void setCategoriaId(Integer categoriaId) {
+	public void setCategoriaId(Long categoriaId) {
 		this.categoriaId = categoriaId;
 	}
 

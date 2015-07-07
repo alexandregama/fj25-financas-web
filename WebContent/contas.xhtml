@@ -43,7 +43,7 @@
 	        <h2><h:outputText value="Todas as Contas" /></h2>
 	        <hr />
 	        <h:form>
-	        <h:dataTable value="#{contasBean.contas}" var="conta">
+	        <h:dataTable value="#{contasBean.lista}" var="conta">
 	        	<h:column>
 	        		<f:facet name="header"><h:outputText value="ID"/></f:facet>
 	        		#{conta.id}
