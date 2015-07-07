@@ -41,10 +41,10 @@
 		    	</h:inputText>
 		    	
 		        <h:outputText value="Categorias" rendered="false"/>
-		    	<h:panelGroup rendered="false">
+		    	<h:panelGroup rendered="true">
 		        	<h:selectOneMenu value="#{movimentacoesBean.categoriaId}" id="selectCategoria">
 			    		<f:selectItem itemLabel="Escolha a Categoria" itemValue="" noSelectionOption="true"/>
-			    		<f:selectItems value="#{movimentacoesBean.categorias}" var="categoria" itemValue="#{categoria.id}" itemLabel="#{categoria.nome}"/>
+			    		<f:selectItems value="#{movimentacoesBean.listaCategorias}" var="categoria" itemValue="#{categoria.id}" itemLabel="#{categoria.nome}"/>
 			    	</h:selectOneMenu>
 				    <h:commandButton value="+" action="#{movimentacoesBean.adicionaCategoria}" >
 				    	<f:ajax execute="selectCategoria" render="tblCategoria"/>
