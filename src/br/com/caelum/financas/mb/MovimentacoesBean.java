@@ -8,8 +8,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.caelum.financas.dao.ContaDao;
-import br.com.caelum.financas.dao.HibernateMovimentacaoDao;
+import br.com.caelum.financas.dao.Contas;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
@@ -24,12 +23,22 @@ public class MovimentacoesBean implements Serializable {
 	private Movimentacoes movimentacoes;
 	
 	@Inject
-	private ContaDao contas;
+	private Contas contas;
 	
 	private List<Movimentacao> listaDeMovimentacoes;
 	private Movimentacao movimentacao = new Movimentacao();
 	private Integer contaId;
 	private Integer categoriaId;
+	
+	@Inject
+	public MovimentacoesBean(Movimentacoes movimentacoes, Contas contas) {
+		this.movimentacoes = movimentacoes;
+		this.contas = contas;
+	}
+	
+	@Deprecated //CDI eyes only
+	MovimentacoesBean() {
+	}
 	
 	public void grava() {
 		System.out.println("Fazendo a gravacao da movimentacao");
