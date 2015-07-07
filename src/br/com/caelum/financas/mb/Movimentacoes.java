@@ -16,6 +16,8 @@ public interface Movimentacoes {
 	
 	List<Movimentacao> lista();
 	
+	List<Movimentacao> listaComCategorias();
+	
 	void remove(Movimentacao movimentacao);
 	
 	List<Movimentacao> buscaPorConta(Conta conta);

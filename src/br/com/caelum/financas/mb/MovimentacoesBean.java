@@ -68,9 +68,9 @@ public class MovimentacoesBean implements Serializable {
 		limpaFormularioDoJSF();
 	}
 
-	public List<Movimentacao> getMovimentacoes() {
+	public List<Movimentacao> getListaMovimentacoes() {
 		if (listaDeMovimentacoes == null) {
-			listaDeMovimentacoes = movimentacoes.lista();
+			listaDeMovimentacoes = movimentacoes.listaComCategorias();
 		}
 		return listaDeMovimentacoes;
 	}
