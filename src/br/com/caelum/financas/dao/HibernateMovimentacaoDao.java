@@ -202,5 +202,13 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 		
 		return query.getSingleResult();
 	}
+
+	@Override
+	public List<Movimentacao> listaComCategorias() {
+		String jpql = "select distinct m from Movimentacao m left join fetch m.categorias";
+		TypedQuery<Movimentacao> query = manager.createQuery(jpql, Movimentacao.class);
+		
+		return query.getResultList();
+	}
 	
 }
