@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.modelo.Conta;
@@ -14,7 +14,7 @@ import br.com.caelum.financas.modelo.Conta;
 @Stateless
 public class HibernateContaDao implements Contas {
 
-	@PersistenceContext
+	@Inject
 	private EntityManager manager;
 
 	@PostConstruct
@@ -29,6 +29,7 @@ public class HibernateContaDao implements Contas {
 
 	@Override
 	public void adiciona(Conta conta) throws AgenciaEmBrancoException {
+		manager.joinTransaction();
 		this.manager.persist(conta);
 		
 		if (conta.getTitular() == null || conta.getTitular().isEmpty()) {
