@@ -70,7 +70,7 @@ public class MovimentacoesBean implements Serializable {
 
 	public List<Movimentacao> getListaMovimentacoes() {
 		if (listaDeMovimentacoes == null) {
-			listaDeMovimentacoes = movimentacoes.listaComCategorias();
+			listaDeMovimentacoes = movimentacoes.lista();
 		}
 		return listaDeMovimentacoes;
 	}

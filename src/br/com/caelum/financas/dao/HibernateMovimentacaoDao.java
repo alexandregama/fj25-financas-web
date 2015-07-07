@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,12 +25,13 @@ import br.com.caelum.financas.modelo.TipoMovimentacao;
 @Stateless
 public class HibernateMovimentacaoDao implements Movimentacoes {
 
-	@PersistenceContext
+	@Inject
 	private EntityManager manager;
 
 	@Override
 	public void adiciona(Movimentacao movimentacao) {
-		this.manager.persist(movimentacao);
+		manager.joinTransaction();
+		manager.persist(movimentacao);
 		
 		if (movimentacao.isValorNegativo()) {
 			throw new ValorInvalidoException("Não é permitido valores negativos");
@@ -39,18 +40,19 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 
 	@Override
 	public Movimentacao busca(Integer id) {
-		return this.manager.find(Movimentacao.class, id);
+		return manager.find(Movimentacao.class, id);
 	}
 
 	@Override
 	public List<Movimentacao> lista() {
-		return this.manager.createQuery("select m from Movimentacao m", Movimentacao.class).getResultList();
+		return manager.createQuery("select m from Movimentacao m", Movimentacao.class).getResultList();
 	}
 
 	@Override
 	public void remove(Movimentacao movimentacao) {
+		manager.joinTransaction();
 		Movimentacao movimentacaoParaRemover = this.manager.find(Movimentacao.class, movimentacao.getId());
-		this.manager.remove(movimentacaoParaRemover);
+		manager.remove(movimentacaoParaRemover);
 	}
 	
 	@Override
