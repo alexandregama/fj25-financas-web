@@ -61,11 +61,13 @@ public class HibernateContaDao implements Contas {
 	@Override
 	public void remove(Conta conta) {
 		Conta contaParaRemover = this.manager.find(Conta.class, conta.getId());
+		manager.joinTransaction();
 		this.manager.remove(contaParaRemover);
 	}
 
 	@Override
 	public void atualiza(Conta conta) {
+		manager.joinTransaction();
 		this.manager.merge(conta);
 	}
 
