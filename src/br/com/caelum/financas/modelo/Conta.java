@@ -14,9 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"agencia", "numero"})})
 @Entity
@@ -28,8 +31,13 @@ public class Conta implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Pattern(regexp = "[A-Z].*")
 	private String titular;
+	
 	private String agencia;
+	
+	@NotBlank
 	private String numero;
 	
 	@Column(name = "banco", nullable = false, length = 20)
