@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -27,6 +28,9 @@ public class Conta implements Serializable {
 	private String agencia;
 	private String numero;
 	private String banco;
+	
+	@Version
+	private Integer versao;
 	
 	@OneToMany(mappedBy = "conta")
 	@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
