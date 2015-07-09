@@ -35,10 +35,6 @@ public class HibernateContaDao implements Contas {
 		if (conta.getTitular() == null || conta.getTitular().isEmpty()) {
 			throw new TitularEmBrancoException("Não é permitido Titular em branco"); 
 		} 
-		
-		if (conta.getAgencia() == null || conta.getAgencia().isEmpty()) {
-			throw new AgenciaEmBrancoException("Não é permitida a Agencia em branco");
-		}
 			
 		if (conta.getBanco() == null || conta.getBanco().isEmpty()) {
 			throw new BancoEmBrancoException("Não é permitido o Banco em branco");

@@ -2,10 +2,13 @@ package br.com.caelum.financas.mb;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import br.com.caelum.financas.dao.AgenciaEmBrancoException;
 import br.com.caelum.financas.dao.Contas;
@@ -23,9 +26,15 @@ public class ContasBean implements Serializable {
 	
 	private List<Conta> lista;
 
+	private Validator validator;
+
+	private JsfMessage messages;
+	
 	@Inject
-	public ContasBean(Contas contas) {
+	public ContasBean(Contas contas, Validator validator, JsfMessage messages) {
 		this.contas = contas;
+		this.validator = validator;
+		this.messages = messages;
 	}
 
 	@Deprecated
@@ -41,15 +50,21 @@ public class ContasBean implements Serializable {
 	}
 
 	public void grava() throws AgenciaEmBrancoException {
-		System.out.println("Gravando a conta");
-		if (conta.getId() != null) {
-			contas.atualiza(conta);
-		} else {
-			contas.adiciona(conta);
+		Set<ConstraintViolation<Conta>> errors = validator.validate(conta);
+		for (ConstraintViolation<Conta> error : errors) {
+			messages.addInfo(error.getMessage());
 		}
-		this.lista = contas.lista();
 		
-		limpaFormularioDoJSF();
+		if (errors.isEmpty()) {
+			if (conta.getId() != null) {
+				contas.atualiza(conta);
+			} else {
+				contas.adiciona(conta);
+			}
+			this.lista = contas.lista();
+			
+			limpaFormularioDoJSF();
+		}
 	}
 
 	public List<Conta> getLista() {
