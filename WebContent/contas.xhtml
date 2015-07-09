@@ -9,35 +9,35 @@
    		<ui:define name="cabecalho">
 		   <h:outputText value="Cadastro de Contas" />
     	</ui:define>
+    	
 		   
    		<ui:define name="corpo">
 	        <h:form>
-	        	<f:validateBean disabled="true">
-			        <h:panelGrid columns="3">
-			        	<h:outputText value="Id" rendered="#{contasBean.conta.id != null}" />
-			        	<h:inputText id="id" value="#{contasBean.conta.id}" rendered="#{contasBean.conta.id != null}" readonly="true"/>
-			        	<h:message for="id"  rendered="#{contasBean.conta.id!=null}" />
-			        	
-			        	<h:outputText value="Titular"/>
-			        	<h:inputText id="titular" value="#{contasBean.conta.titular}"/>
-			        	<h:message for="titular" />
-			        	
-						<h:outputText value="Banco"/>
-						<h:inputText id="banco" value="#{contasBean.conta.banco}"/>
-						<h:message for="banco" />
-			        	
-			        	<h:outputText value="Agência"/>
-						<h:inputText id="agencia" value="#{contasBean.conta.agencia}" />
-						<h:message for="agencia" />
-			
-			        	<h:outputText value="Número"/>
-			        	<h:inputText id="numero" value="#{contasBean.conta.numero}"/>
-			        	<h:message for="numero" />
-			        	
-			        	<h:commandButton value="Gravar" action="#{contasBean.grava}" rendered="#{contasBean.conta.id == null}"/> 
-			        	<h:commandButton value="Atualizar" action="#{contasBean.grava}" rendered="#{contasBean.conta.id != null}"/> 
-			        </h:panelGrid>
-			    </f:validateBean>
+		    	<h:messages/>
+		        <h:panelGrid columns="3">
+		        	<h:outputText value="Id" rendered="#{contasBean.conta.id != null}" />
+		        	<h:inputText id="id" value="#{contasBean.conta.id}" rendered="#{contasBean.conta.id != null}" readonly="true"/>
+		        	<h:message for="id"  rendered="#{contasBean.conta.id!=null}" />
+		        	
+		        	<h:outputText value="Titular"/>
+		        	<h:inputText id="titular" value="#{contasBean.conta.titular}"/>
+		        	<h:message for="titular" />
+		        	
+					<h:outputText value="Banco"/>
+					<h:inputText id="banco" value="#{contasBean.conta.banco}"/>
+					<h:message for="banco" />
+		        	
+		        	<h:outputText value="Agência"/>
+					<h:inputText id="agencia" value="#{contasBean.conta.agencia}" />
+					<h:message for="agencia" />
+		
+		        	<h:outputText value="Número"/>
+		        	<h:inputText id="numero" value="#{contasBean.conta.numero}"/>
+		        	<h:message for="numero" />
+		        	
+		        	<h:commandButton value="Gravar" action="#{contasBean.grava}" rendered="#{contasBean.conta.id == null}"/> 
+		        	<h:commandButton value="Atualizar" action="#{contasBean.grava}" rendered="#{contasBean.conta.id != null}"/> 
+		        </h:panelGrid>
 	        </h:form>
 	        
 	        <h2><h:outputText value="Todas as Contas" /></h2>
