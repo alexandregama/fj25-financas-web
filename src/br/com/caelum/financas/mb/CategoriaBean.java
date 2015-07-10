@@ -33,6 +33,12 @@ public class CategoriaBean {
 		
 		limpaFormulario();
 	}
+	
+	public void remove(Categoria categoria) {
+		categorias.remove(categoria);
+		
+		limpaFormulario();
+	}
 
 	public List<Categoria> getLista() {
 		if (lista == null) {

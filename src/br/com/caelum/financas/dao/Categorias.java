@@ -13,4 +13,6 @@ public interface Categorias {
 
 	void salva(Categoria categoria);
 
+	void remove(Categoria categoria);
+
 }

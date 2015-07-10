@@ -37,4 +37,11 @@ public class HibernateCategoriaDao implements Categorias {
 		manager.persist(categoria);
 	}
 
+	@Override
+	public void remove(Categoria categoria) {
+		manager.joinTransaction();
+		Categoria categoriaParaRemover = manager.find(Categoria.class, categoria.getId());
+		manager.remove(categoriaParaRemover);
+	}
+
 }
