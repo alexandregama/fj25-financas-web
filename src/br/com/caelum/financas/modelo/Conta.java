@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.Pattern;
 
@@ -40,6 +42,10 @@ public class Conta implements Serializable {
 	
 	@Version
 	private Integer versao;
+	
+	@OneToOne
+	@JoinColumn(unique = true)
+	private Gerente gerente;
 	
 	@OneToMany(mappedBy = "conta")
 	@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
@@ -91,6 +97,14 @@ public class Conta implements Serializable {
 
 	public int quantidadeDeMovimentacoes() {
 		return this.movimentacoes.size();
+	}
+
+	public Gerente getGerente() {
+		return gerente;
+	}
+
+	public void setGerente(Gerente gerente) {
+		this.gerente = gerente;
 	}
 
 }
