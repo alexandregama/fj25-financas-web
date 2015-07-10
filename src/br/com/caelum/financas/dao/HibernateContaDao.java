@@ -67,6 +67,15 @@ public class HibernateContaDao implements Contas {
 		this.manager.merge(conta);
 	}
 
+	@Override
+	public List<Conta> buscaPorTitularCriteria(String titular) {
+		String jpql = "select c from Conta c where c.titular = :titular";
+		TypedQuery<Conta> query = manager.createQuery(jpql, Conta.class);
+		query.setParameter("titular", titular);
+		
+		return query.getResultList();
+	}
+
 }
 
 

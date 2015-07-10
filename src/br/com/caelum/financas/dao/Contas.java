@@ -16,4 +16,6 @@ public interface Contas {
 
 	void atualiza(Conta conta);
 
+	List<Conta> buscaPorTitularCriteria(String titular);
+
 }

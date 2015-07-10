@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/_template.xhtml">
+	
+	<ui:define name="cabecalho">
+		<h2>Pesquisa de Contas por Titular</h2>
+	</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form>
+			<h:outputText value="Titular"/>
+			<h:inputText value="#{contaPorTitularBean.conta.titular}" />
+			
+			<h:commandButton value="Pesquisar" action="#{contaPorTitularBean.pesquisa}"/>
+		</h:form>
+		
+		<h:form>
+			<h2>Lista de Contas</h2>
+			<hr />
+			<h:dataTable value="#{contaPorTitularBean.lista}" var="conta">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					#{conta.id}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Titular</f:facet>
+					#{conta.titular}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Banco</f:facet>
+					#{conta.banco}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Agencia</f:facet>
+					#{conta.agencia}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Numero</f:facet>
+					#{conta.numero}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Gerente</f:facet>
+					#{conta.gerente.nome}
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+	
+</ui:composition>
+</html>
