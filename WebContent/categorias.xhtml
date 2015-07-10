@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/_template.xhtml">
+	
+	<ui:define name="cabecalho">
+	</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form>
+			<h:messages />
+			<h:outputText value="Nome"/>
+			<h:inputText id="nome" value="#{categoriaBean.categoria.nome}"/>
+			<h:message for="nome"></h:message>
+			
+			<h:commandButton value="Cadastrar" action="#{categoriaBean.salva}"/>
+		</h:form>
+		
+		<h2><h:outputText value="Todas as Categorias" /></h2>
+		<hr />
+		<h:form>
+			<h:dataTable value="#{categoriaBean.lista}" var="categoria">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					#{categoria.id}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					#{categoria.nome}
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="rodape">
+		<h:link outcome="contas" value="Ir para Contas"/>
+	</ui:define>
+	
+</ui:composition>
+</html>

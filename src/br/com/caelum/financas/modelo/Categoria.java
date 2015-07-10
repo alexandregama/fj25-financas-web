@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Categoria implements Serializable {
 
@@ -18,6 +20,7 @@ public class Categoria implements Serializable {
 	private Long id;
 	
 	@Column(name = "nome", length = 50, nullable = false)
+	@NotBlank
 	private String nome;
 	
 	@Override

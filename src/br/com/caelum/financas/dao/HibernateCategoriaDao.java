@@ -31,4 +31,10 @@ public class HibernateCategoriaDao implements Categorias {
 		return Optional.ofNullable(categoria);
 	}
 
+	@Override
+	public void salva(Categoria categoria) {
+		manager.joinTransaction();
+		manager.persist(categoria);
+	}
+
 }
