@@ -16,7 +16,7 @@
 			  		<h:outputText value="Conta"/>
 			      	<h:selectOneMenu value="#{mesesComMovimentacaoBean.conta.id}">
 			      		<f:selectItem itemLabel="Escolha a conta" itemValue="" noSelectionOption="true"/>
-			      		<f:selectItems value="#{contasBean.contas}" var="conta" itemLabel="#{conta.titular} - #{conta.banco}" itemValue="#{conta.id}" />
+			      		<f:selectItems value="#{contasBean.lista}" var="conta" itemLabel="#{conta.titular} - #{conta.banco}" itemValue="#{conta.id}" />
 			      	</h:selectOneMenu>
 			      	
 			      	<h:outputText value="Tipo" />
