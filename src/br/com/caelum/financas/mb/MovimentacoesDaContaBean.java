@@ -13,7 +13,7 @@ import br.com.caelum.financas.modelo.Movimentacao;
 @RequestScoped
 public class MovimentacoesDaContaBean {
 
-	private List<Movimentacao> listaDeMovimentacoes;
+	private List<Movimentacao> lista;
 	
 	private Conta conta = new Conta();
 	
@@ -28,12 +28,12 @@ public class MovimentacoesDaContaBean {
 	MovimentacoesDaContaBean() {
 	}
 	
-	public void lista() {
-		this.listaDeMovimentacoes = movimentacoes.buscaPorConta(conta);
+	public void pesquisar() {
+		this.lista = movimentacoes.buscaPorConta(conta);
 	}
 
-	public List<Movimentacao> getMovimentacoes() {
-		return listaDeMovimentacoes;
+	public List<Movimentacao> getLista() {
+		return lista;
 	}
 
 	public Conta getConta() {

@@ -57,9 +57,10 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 	
 	@Override
 	public List<Movimentacao> buscaPorConta(Conta conta) {
-		String sql = "select m from Movimentacao m where m.conta = :conta";
+		Conta contaEncontrada = manager.find(Conta.class, conta.getId());
+		String sql = "select m from Movimentacao m left join fetch m.categorias where m.conta = :conta";
 		TypedQuery<Movimentacao> query = manager.createQuery(sql, Movimentacao.class);
-		query.setParameter("conta", conta);
+		query.setParameter("conta", contaEncontrada);
 		
 		return query.getResultList();
 	}
