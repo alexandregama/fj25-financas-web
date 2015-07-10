@@ -40,8 +40,7 @@ public class HibernateGerenteDao implements Gerentes {
 	@Override
 	public void atualiza(Gerente gerente) {
 		manager.joinTransaction();
-		Gerente gerenteParaAtualizar = manager.find(Gerente.class, gerente.getId());
-		manager.merge(gerenteParaAtualizar);
+		manager.merge(gerente);
 	}
 
 }

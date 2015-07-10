@@ -69,6 +69,14 @@
 					<f:facet name="header">Estado</f:facet>
 					#{gerente.endereco.estado}
 				</h:column>
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink value="Remover" action="#{gerenteBean.remove(gerente)}">
+					</h:commandLink> | 
+					<h:commandLink value="Alterar">
+						<f:setPropertyActionListener value="#{gerente}" target="#{gerenteBean.gerente}" />
+					</h:commandLink>
+				</h:column>
 			</h:dataTable>
 		</h:form>
 	</ui:define>
