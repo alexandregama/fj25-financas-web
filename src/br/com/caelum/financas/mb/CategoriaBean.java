@@ -1,8 +1,9 @@
 package br.com.caelum.financas.mb;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -10,8 +11,10 @@ import br.com.caelum.financas.dao.Categorias;
 import br.com.caelum.financas.modelo.Categoria;
 
 @Named
-@RequestScoped
-public class CategoriaBean {
+@ViewScoped
+public class CategoriaBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Categorias categorias;
 	
@@ -32,9 +35,13 @@ public class CategoriaBean {
 	}
 	
 	public void salva() {
-		categorias.salva(categoria);
-		
-		messages.addInfo("Categoria salva com sucesso!");
+		if (categoria.getId() == null) {
+			categorias.salva(categoria);
+			messages.addInfo("Categoria salva com sucesso!");
+		} else {
+			categorias.atualiza(categoria);
+			messages.addInfo("Categoria atualizada com sucesso!");
+		}
 		
 		limpaFormulario();
 	}

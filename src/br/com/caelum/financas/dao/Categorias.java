@@ -15,4 +15,6 @@ public interface Categorias {
 
 	void remove(Categoria categoria);
 
+	void atualiza(Categoria categoria);
+
 }

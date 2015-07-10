@@ -44,4 +44,10 @@ public class HibernateCategoriaDao implements Categorias {
 		manager.remove(categoriaParaRemover);
 	}
 
+	@Override
+	public void atualiza(Categoria categoria) {
+		manager.joinTransaction();
+		manager.merge(categoria);
+	}
+
 }
