@@ -18,10 +18,13 @@ public class CategoriaBean {
 	private List<Categoria> lista;
 	
 	private Categoria categoria = new Categoria();
+
+	private JsfMessage messages;
 	
 	@Inject
-	public CategoriaBean(Categorias categorias) {
+	public CategoriaBean(Categorias categorias, JsfMessage messages) {
 		this.categorias = categorias;
+		this.messages = messages;
 	}
 	
 	@Deprecated //CDI eyes only
@@ -31,11 +34,15 @@ public class CategoriaBean {
 	public void salva() {
 		categorias.salva(categoria);
 		
+		messages.addInfo("Categoria salva com sucesso!");
+		
 		limpaFormulario();
 	}
 	
 	public void remove(Categoria categoria) {
 		categorias.remove(categoria);
+		
+		messages.addInfo("Categoria removida com sucesso!");
 		
 		limpaFormulario();
 	}
