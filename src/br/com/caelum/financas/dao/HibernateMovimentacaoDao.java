@@ -2,6 +2,7 @@ package br.com.caelum.financas.dao;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -212,6 +213,33 @@ public class HibernateMovimentacaoDao implements Movimentacoes {
 	public List<Movimentacao> listaComCategorias() {
 		String jpql = "select distinct m from Movimentacao m left join fetch m.categorias";
 		TypedQuery<Movimentacao> query = manager.createQuery(jpql, Movimentacao.class);
+		
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Movimentacao> pesquisaPorContaTipoMes(Conta conta, TipoMovimentacao tipoMovimentacao, Integer mes) {
+		conta = manager.find(Conta.class, conta.getId());
+		
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Movimentacao> criteria = builder.createQuery(Movimentacao.class);
+		
+		Root<Movimentacao> root = criteria.from(Movimentacao.class);
+		
+		Predicate conjunction = builder.conjunction();
+		if (conta.getId() != null) {
+			conjunction = builder.and(conjunction, builder.equal(root.<Conta>get("conta"), conta));
+		}
+		if (tipoMovimentacao != null) {
+			conjunction = builder.and(conjunction, builder.equal(root.<TipoMovimentacao>get("tipoMovimentacao"), tipoMovimentacao));
+		}
+		if (mes != null) {
+			Expression<Integer> expression = builder.function("month", Integer.class, root.<Calendar>get("data"));
+			conjunction = builder.and(conjunction, builder.equal(expression, mes));
+		}
+		criteria.where(conjunction);
+		
+		TypedQuery<Movimentacao> query = manager.createQuery(criteria);
 		
 		return query.getResultList();
 	}
