@@ -38,7 +38,7 @@ public class AgendadorExercicio {
 		System.out.println("Executando o Agendador do Exercicio");
 	}
 	
-	@Schedule(hour = "*", minute = "*/1")
+	@Schedule(hour = "*", minute = "*/30")
 	public void enviaEmailComUltimasMovimentacoes() {
 		System.out.println("Enviando email com as ultimas modificacoes");
 	}

@@ -30,13 +30,20 @@ public class CategoriaBean {
 	
 	public void salva() {
 		categorias.salva(categoria);
+		
+		limpaFormulario();
 	}
-	
+
 	public List<Categoria> getLista() {
 		if (lista == null) {
 			lista = categorias.lista();
 		}
 		return lista;
+	}
+	
+	private void limpaFormulario() {
+		categoria = new Categoria();
+		lista = null;
 	}
 
 	public Categoria getCategoria() {
