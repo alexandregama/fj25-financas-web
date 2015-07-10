@@ -34,6 +34,12 @@
 		        	<h:inputText id="numero" value="#{contasBean.conta.numero}"/>
 		        	<h:message for="numero" />
 		        	
+		        	<h:outputText value="Gerente"/>
+		        	<h:selectOneMenu value="#{contasBean.conta.gerente.id}">
+		        		<f:selectItem itemLabel="Selecione um gerente" itemValue="0" />
+		        		<f:selectItems value="#{gerenteBean.lista}" var="gerente" itemLabel="${gerente.nome}" itemValue="#{gerente.id}"/>
+		        	</h:selectOneMenu>
+		        	
 		        	<h:commandButton value="Gravar" action="#{contasBean.grava}" rendered="#{contasBean.conta.id == null}"/> 
 		        	<h:commandButton value="Atualizar" action="#{contasBean.grava}" rendered="#{contasBean.conta.id != null}"/> 
 		        </h:panelGrid>
@@ -60,8 +66,12 @@
 	        		#{conta.agencia}
 	        	</h:column>
 	        	<h:column>
-	        		<f:facet name="header"><h:outputText value="Núm. Conta"/></f:facet>
+	        		<f:facet name="header"><h:outputText value="Conta"/></f:facet>
 	        		#{conta.numero}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Gerente"/></f:facet>
+	        		#{conta.gerente.nome}
 	        	</h:column>
 	        	<h:column>
 	        		<f:facet name="header"><h:outputText value="Ações"/></f:facet>
@@ -75,5 +85,9 @@
 	        </h:dataTable>
 	        </h:form>
 		</ui:define>
+        
+        <ui:define name="rodape">
+        	<h:link outcome="movimentacoes" value="Ir para Movimentações"/> <br/>
+        </ui:define>
 	</ui:composition>
 </html>

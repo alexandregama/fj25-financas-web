@@ -12,7 +12,7 @@ import javax.persistence.TypedQuery;
 import br.com.caelum.financas.modelo.Conta;
 
 @Stateless
-class HibernateContaDao implements Contas {
+public class HibernateContaDao implements Contas {
 
 	@Inject
 	private EntityManager manager;

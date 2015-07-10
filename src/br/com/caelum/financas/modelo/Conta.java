@@ -45,7 +45,7 @@ public class Conta implements Serializable {
 	
 	@OneToOne
 	@JoinColumn(unique = true)
-	private Gerente gerente;
+	private Gerente gerente = new Gerente();
 	
 	@OneToMany(mappedBy = "conta")
 	@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
