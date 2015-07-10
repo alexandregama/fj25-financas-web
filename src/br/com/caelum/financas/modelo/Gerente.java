@@ -18,30 +18,38 @@ public class Gerente {
 	private String telefone;
 	
 	@Embedded
-	private Endereco data;
+	private Endereco endereco = new Endereco();
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public String getTelefone() {
 		return telefone;
 	}
 
-	public String getRua() {
-		return data.rua;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
-	public String getCidade() {
-		return data.cidade;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public String getEstado() {
-		return data.estado;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 }

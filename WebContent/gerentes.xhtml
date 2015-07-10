@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/_template.xhtml">
+
+	<ui:define name="cabecalho">
+		<h2>Cadastro de Gerentes</h2>
+	</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="form_cadastro">
+			<h:panelGrid columns="3">
+				<h:outputText value="Id" rendered="#{gerenteBean.gerente.id != null}"/>
+				<h:inputText id="id" value="#{gerenteBean.gerente.id}" rendered="#{gerenteBean.gerente.id != null}" />
+				<h:message for="id" rendered="#{gerenteBean.gerente.id != null}"/>
+				
+				<h:outputText value="Nome"/>
+				<h:inputText id="nome" value="#{gerenteBean.gerente.nome}" />
+				<h:message for="nome"/>
+				
+				<h:outputText value="Telefone"/>
+				<h:inputText id="telefone" value="#{gerenteBean.gerente.telefone}" />
+				<h:message for="telefone"/>
+				
+				<h:outputText value="Rua"/>
+				<h:inputText id="rua" value="#{gerenteBean.gerente.endereco.rua}" />
+				<h:message for="rua"/>
+				
+				<h:outputText value="Cidade"/>
+				<h:inputText id="cidade" value="#{gerenteBean.gerente.endereco.cidade}" />
+				<h:message for="cidade"/>
+				
+				<h:outputText value="Estado"/>
+				<h:inputText id="estado" value="#{gerenteBean.gerente.endereco.estado}" />
+				<h:message for="estado"/>
+			</h:panelGrid>
+			
+			<h:commandButton value="Cadastrar" action="#{gerenteBean.salva}" rendered="#{gerenteBean.gerente.id == null}" />
+			<h:commandButton value="Alterar" action="#{gerenteBean.salva}" rendered="#{gerenteBean.gerente.id != null}" />
+		</h:form>
+		
+		<h:form id="form_listagem">
+			<h:dataTable value="#{gerenteBean.lista}" var="gerente">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					#{gerente.id}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					#{gerente.nome}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Telefone</f:facet>
+					#{gerente.telefone}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Rua</f:facet>
+					#{gerente.endereco.rua}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Cidade</f:facet>
+					#{gerente.endereco.cidade}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Estado</f:facet>
+					#{gerente.endereco.estado}
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="rodape">
+		<h:link outcome="contas" value="Ir para Contas"/> <br/>
+	</ui:define>
+
+</ui:composition>
+</html>
