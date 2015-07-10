@@ -8,6 +8,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import br.com.caelum.financas.modelo.Conta;
 
@@ -69,9 +72,13 @@ public class HibernateContaDao implements Contas {
 
 	@Override
 	public List<Conta> buscaPorTitularCriteria(String titular) {
-		String jpql = "select c from Conta c where c.titular = :titular";
-		TypedQuery<Conta> query = manager.createQuery(jpql, Conta.class);
-		query.setParameter("titular", titular);
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Conta> criteria = builder.createQuery(Conta.class);
+		
+		Root<Conta> root = criteria.from(Conta.class);
+		criteria.where(builder.like(root.<String>get("titular"), titular));
+		
+		TypedQuery<Conta> query = manager.createQuery(criteria);
 		
 		return query.getResultList();
 	}
