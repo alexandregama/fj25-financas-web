@@ -1,11 +1,13 @@
 package br.com.caelum.financas.mb;
 
 import java.util.List;
+
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
@@ -13,22 +15,36 @@ import javax.inject.Named;
 public class PesquisaMovimentacoesBean {
 
 	private Conta conta = new Conta();
+
 	private Integer mes;
+
 	private TipoMovimentacao tipoMovimentacao;
-	private List<Movimentacao> movimentacoes;
 
-	
-	public void pesquisa() {
-		System.out.println("Pesquisando pelos filtros solicitados");
+	private List<Movimentacao> lista;
 
+	private Movimentacoes movimentacoes;
+
+	@Inject
+	public PesquisaMovimentacoesBean(Movimentacoes movimentacoes) {
+		this.movimentacoes = movimentacoes;
 	}
 
-	public List<Movimentacao> getMovimentacoes() {
-		return movimentacoes;
+	@Deprecated
+	// CDI eyes only
+	PesquisaMovimentacoesBean() {
+	}
+
+	public void pesquisa() {
+		System.out.println("Pesquisando pelos filtros solicitados");
+		lista = movimentacoes.pesquisaPorContaTipoMes(conta, tipoMovimentacao, mes);
+	}
+
+	public List<Movimentacao> getLista() {
+		return this.lista;
 	}
 
 	public Conta getConta() {
-		if(conta.getId()!=null && conta.getId()==0) {
+		if (conta.getId() != null && conta.getId() == 0) {
 			conta.setId(null);
 		}
 		return conta;
@@ -38,9 +54,9 @@ public class PesquisaMovimentacoesBean {
 		this.conta = conta;
 	}
 
-	public Integer getMes() {	
-		if(mes!=null && mes==0) {
-			mes=null;
+	public Integer getMes() {
+		if (mes != null && mes == 0) {
+			mes = null;
 		}
 		return mes;
 	}

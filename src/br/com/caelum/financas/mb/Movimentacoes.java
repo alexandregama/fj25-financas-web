@@ -43,5 +43,8 @@ public interface Movimentacoes {
 	BigDecimal listaPorTitularDaContaComCriteria(String titular);
 
 	BigDecimal listaPorTitularDaContaComCriteriaReduzida(String titular);
+
+	List<Movimentacao> pesquisaPorContaTipoMes(Conta conta,
+			TipoMovimentacao tipoMovimentacao, Integer mes);
 	
 }
