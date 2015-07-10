@@ -17,14 +17,14 @@
 		    	<h:outputText value="Conta"/>
 	        	<h:selectOneMenu value="#{movimentacoesDaContaBean.conta.id}">
 	        		<f:selectItem itemLabel="Escolha a conta" itemValue="" noSelectionOption="true"/>
-	        		<f:selectItems value="#{contasBean.contas}" var="conta" itemLabel="#{conta.titular} - #{conta.banco}" itemValue="#{conta.id}" />
+	        		<f:selectItems value="#{contasBean.lista}" var="conta" itemLabel="#{conta.titular} - #{conta.banco}" itemValue="#{conta.id}" />
 	        	</h:selectOneMenu>
 	        	
-		    	<h:commandButton value="Pesquisar" action="#{movimentacoesDaContaBean.lista}"/>
+		    	<h:commandButton value="Pesquisar" action="#{movimentacoesDaContaBean.pesquisar}"/>
 		    </h:panelGrid>
 		   </h:form>
 
-	        <h:dataTable value="#{movimentacoesDaContaBean.movimentacoes}" var="movimentacao" rendered="#{movimentacoesDaContaBean.movimentacoes != null}">
+	        <h:dataTable value="#{movimentacoesDaContaBean.lista}" var="movimentacao">
 	        	<h:column>
 	        		<f:facet name="header">
 	        			<h:outputText value="ID" />
