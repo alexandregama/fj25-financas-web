@@ -23,7 +23,7 @@ import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
 
 @Stateless
-public class HibernateMovimentacaoDao implements Movimentacoes {
+class HibernateMovimentacaoDao implements Movimentacoes {
 
 	@Inject
 	private EntityManager manager;

@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import br.com.caelum.financas.modelo.Gerente;
 
 @Stateless
-public class HibernateGerenteDao implements Gerentes {
+class HibernateGerenteDao implements Gerentes {
 
 	private EntityManager manager;
 	
