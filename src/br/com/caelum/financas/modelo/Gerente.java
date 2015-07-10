@@ -1,5 +1,6 @@
 package br.com.caelum.financas.modelo;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +17,8 @@ public class Gerente {
 	
 	private String telefone;
 	
-	private String rua;
-	
-	private String cidade;
-	
-	private String estado;
+	@Embedded
+	private Endereco data;
 
 	public Long getId() {
 		return id;
@@ -35,15 +33,15 @@ public class Gerente {
 	}
 
 	public String getRua() {
-		return rua;
+		return data.rua;
 	}
 
 	public String getCidade() {
-		return cidade;
+		return data.cidade;
 	}
 
 	public String getEstado() {
-		return estado;
+		return data.estado;
 	}
 	
 }
