@@ -11,4 +11,10 @@ public interface Categorias {
 
 	Optional<Categoria> buscaPor(Long categoriaId);
 
+	void salva(Categoria categoria);
+
+	void remove(Categoria categoria);
+
+	void atualiza(Categoria categoria);
+
 }

@@ -14,7 +14,7 @@ public class AgendadorTimerServiceSchedule {
 		System.out.println("Construindo o AgendadorTimerServiceSchedule");
 	}
 	
-	@Schedule(hour = "*", minute = "*/1", second = "0")
+	@Schedule(hour = "*", minute = "*/30", second = "0")
 	public void executa(Timer timer) {
 		System.out.println("Executando o AgendadorTimerServiceSchedule usando Schedule");
 		System.out.println("Timer: " + timer);

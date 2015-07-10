@@ -8,7 +8,7 @@ import javax.ejb.AccessTimeout;
 import javax.ejb.Singleton;
 
 @Singleton
-@AccessTimeout(unit = TimeUnit.SECONDS, value = 5) //javax.ejb.ConcurrentAccessTimeoutException pois o padrão é 500 mili
+@AccessTimeout(unit = TimeUnit.MINUTES, value = 30) //javax.ejb.ConcurrentAccessTimeoutException pois o padrão é 500 mili
 public class AgendadorSingleton {
 
 	private static int totalCriado;

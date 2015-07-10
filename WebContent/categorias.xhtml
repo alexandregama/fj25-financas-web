@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/_template.xhtml">
+	
+	<ui:define name="cabecalho">
+		<h:outputText value="Cadastro de Categorias" />
+	</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="form_cadastro">
+			<h:messages />
+			<h:panelGrid columns="3">
+				<h:outputText value="Id" rendered="#{categoriaBean.categoria.id != null}"/>
+				<h:inputText id="id" value="#{categoriaBean.categoria.id}" rendered="#{categoriaBean.categoria.id != null}" readonly="true"/>
+				<h:message for="id" rendered="#{categoriaBean.categoria.id != null}"/>
+				
+				<h:outputText value="Nome"/>
+				<h:inputText id="nome" value="#{categoriaBean.categoria.nome}"/>
+				<h:message for="nome"></h:message>
+			</h:panelGrid>
+			
+			<h:commandButton value="Cadastrar" action="#{categoriaBean.salva}" rendered="#{categoriaBean.categoria.id == null}"/>
+			<h:commandButton value="Atualizar" action="#{categoriaBean.salva}" rendered="#{categoriaBean.categoria.id != null}"/>
+		</h:form>
+		
+		<h2><h:outputText value="Todas as Categorias" /></h2>
+		<hr />
+		<h:form id="form_listagem">
+			<h:dataTable value="#{categoriaBean.lista}" var="categoria">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					#{categoria.id}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					#{categoria.nome}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink value="Remover" action="#{categoriaBean.remove(categoria)}">
+					</h:commandLink> | 
+					<h:commandLink value="Alterar">
+						<f:setPropertyActionListener value="#{categoria}" target="#{categoriaBean.categoria}"/>
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="rodape">
+		<h:link outcome="contas" value="Ir para Contas"/> <br/>
+	</ui:define>
+	
+</ui:composition>
+</html>
