@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 import br.com.caelum.financas.modelo.Categoria;
 
 @Stateless
-public class HibernateCategoriaDao implements Categorias {
+class HibernateCategoriaDao implements Categorias {
 
 	@PersistenceContext
 	private EntityManager manager;
