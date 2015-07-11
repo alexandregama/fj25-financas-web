@@ -7,6 +7,7 @@ import javax.annotation.PreDestroy;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -81,6 +82,14 @@ public class HibernateContaDao implements Contas {
 		TypedQuery<Conta> query = manager.createQuery(criteria);
 		
 		return query.getResultList();
+	}
+
+	@Override
+	public Conta buscaComLockPessimista(Integer id) {
+		manager.joinTransaction();
+		Conta conta = manager.find(Conta.class, id);
+		manager.lock(conta, LockModeType.PESSIMISTIC_READ);
+		return conta;
 	}
 
 }

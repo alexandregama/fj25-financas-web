@@ -18,4 +18,6 @@ public interface Contas {
 
 	List<Conta> buscaPorTitularCriteria(String titular);
 
+	Conta buscaComLockPessimista(Integer i);
+
 }
